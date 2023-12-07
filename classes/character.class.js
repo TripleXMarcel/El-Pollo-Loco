@@ -4,7 +4,10 @@ class Character extends MovableObject {
     height = 230;
     width = 100;
     speed = 10;
-    IMAGES_WALKING = [
+    health = 100;
+    coin = 12;
+    salsa = 6;
+    IMAGES = [
         'img/2_character_pepe/2_walk/W-21.png',
         'img/2_character_pepe/2_walk/W-22.png',
         'img/2_character_pepe/2_walk/W-23.png',
@@ -18,7 +21,7 @@ class Character extends MovableObject {
 
     constructor() {
         super().loadImage('img/2_character_pepe/2_walk/W-21.png');
-        this.loadImages(this.IMAGES_WALKING);
+        this.loadImages(this.IMAGES);
         this.animate();
     }
 
@@ -43,7 +46,7 @@ class Character extends MovableObject {
         }, 1000 / 60);
         setInterval(() => {
             if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x || this.world.keyboard.LEFT && this.x > 0) {
-                this.playAnimation(this.IMAGES_WALKING);
+                this.playAnimation(this.IMAGES);
             }
         }, 50);
 

@@ -27,7 +27,6 @@ document.addEventListener('keydown', (e)=> {
     if (e.key == ' ') {
         keyboard.SPACE = true;
     };
-    console.log(e);
 });
 document.addEventListener('keyup', (e)=> {
     if (e.key == 'ArrowUp'|| e.key == 'w') {

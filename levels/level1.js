@@ -161,4 +161,39 @@ const level1 = new Level(
         new BackgroundObject('img/5_background/layers/3_third_layer/2.png', 719 * 13),
         new BackgroundObject('img/5_background/layers/2_second_layer/2.png', 719 * 13),
         new BackgroundObject('img/5_background/layers/1_first_layer/2.png', 719 * 13)
-    ]);
+    ], [
+    new Coin(1),
+    new Coin(2),
+    new Coin(3),
+    new Coin(4),
+    new Coin(5),
+    new Coin(6),
+    new Coin(7),
+    new Coin(8),
+    new Coin(9),
+    new Coin(10)
+], [
+    new Bottle('img/6_salsa_bottle/1_salsa_bottle_on_ground.png', 1),
+    new Bottle('img/6_salsa_bottle/2_salsa_bottle_on_ground.png', 2),
+    new Bottle('img/6_salsa_bottle/1_salsa_bottle_on_ground.png', 3),
+    new Bottle('img/6_salsa_bottle/2_salsa_bottle_on_ground.png', 4),
+    new Bottle('img/6_salsa_bottle/1_salsa_bottle_on_ground.png', 5),
+    new Bottle('img/6_salsa_bottle/2_salsa_bottle_on_ground.png', 6),
+    new Bottle('img/6_salsa_bottle/1_salsa_bottle_on_ground.png', 7),
+    new Bottle('img/6_salsa_bottle/2_salsa_bottle_on_ground.png', 8),
+    new Bottle('img/6_salsa_bottle/1_salsa_bottle_on_ground.png', 9),
+    new Bottle('img/6_salsa_bottle/2_salsa_bottle_on_ground.png', 10),
+    new Bottle('img/6_salsa_bottle/1_salsa_bottle_on_ground.png', 11),
+    new Bottle('img/6_salsa_bottle/2_salsa_bottle_on_ground.png', 12),
+    new Bottle('img/6_salsa_bottle/1_salsa_bottle_on_ground.png', 13),
+    new Bottle('img/6_salsa_bottle/2_salsa_bottle_on_ground.png', 14)
+], [
+    new Statusbar('img/7_statusbars/4_bar_elements/statusbar_empty.png', 20, 20, 50, 250),
+    new Statusbar('img/7_statusbars/4_bar_elements/statusbar_empty.png', 20, 60, 50, 250),
+    new Statusbar('img/7_statusbars/4_bar_elements/statusbar_empty.png', 20, 100, 50, 250),
+    new HealthBar('img/7_statusbars/4_bar_elements/statusbar_green.png', 20, 20, 50, 250),
+    new Statusbar('img/7_statusbars/3_icons/icon_salsa_bottle.png', 5, 8, 55, 55),
+    new Statusbar('img/7_statusbars/3_icons/icon_health.png', 5, 48, 55, 55),
+    new Statusbar('img/7_statusbars/3_icons/icon_coin.png', 5, 88, 55, 55)
+    
+]);

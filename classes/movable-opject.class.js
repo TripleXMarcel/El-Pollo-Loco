@@ -21,19 +21,19 @@ class MovableObject {
     }
 
     moveRight() {
-        x++;
+        this.x += this.speed;
+        this.otherDirection = false;
     }
 
     moveLeft() {
-        setInterval(() => {
             this.x -= this.speed;
-        }, 1000 / 60);
+            this.otherDirection = true;
 
     }
-    playAnimation(images){
-        let i = this.currentImage % this.IMAGES.length;
-                let path = images[i];
-                this.img = this.imageCache[path];
-                this.currentImage++;
+    playAnimation(images) {
+        let i = this.currentImage % images.length;
+        let path = images[i];
+        this.img = this.imageCache[path];
+        this.currentImage++;
     }
 }

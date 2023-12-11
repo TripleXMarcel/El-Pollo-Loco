@@ -1,5 +1,25 @@
 class World {
     character = new Character();
+    statusbar = new Statusbar(
+        [
+            new EmptyStatusBar(0),
+            new EmptyStatusBar(40),
+            new EmptyStatusBar(80)
+        ],
+        [
+            new HealthBar()
+        ],
+        [
+            new CoinBar()
+        ],
+        [
+            new SalsaBar()
+        ],
+        [
+            new HealthEndBossBar()
+        ]
+    );
+
     camera_x = 0;
 
     level = level1;
@@ -27,7 +47,13 @@ class World {
         this.addObjectsToMap(this.level.clouds);
         this.addObjectsToMap(this.level.coins);
         this.addObjectsToMap(this.level.bottle);
-        this.addObjectsToMap(this.level.statusbar);
+        this.ctx.translate(-this.camera_x, 0);
+        this.addObjectsToMap(this.statusbar.emptyStatusBar);
+        this.addObjectsToMap(this.statusbar.healthStatusBar);
+        //this.addObjectsToMap(this.statusbar.coinStatusBar);
+        //this.addObjectsToMap(this.statusbar.salsaStatusBar);
+        //this.addObjectsToMap(this.statusbar.healthEndBossStatusBar);
+        this.ctx.translate(this.camera_x, 0);
         this.addToMap(this.character);
         this.ctx.translate(-this.camera_x, 0);
         let self = this;
@@ -40,10 +66,12 @@ class World {
         setInterval(() => {
             this.level.enemies.forEach((enemy) => {
                 if (this.character.isColliding(enemy)) {
-                    console.log('Collidiert', enemy);
+
+                    this.character.hit();
+                    console.log('Collidiert', this.character.energy);
                 }
             });
-        }, 10)
+        }, 1000 / 25)
     }
 
     addObjectsToMap(objects) {
@@ -52,7 +80,7 @@ class World {
         });
     }
 
-    
+
 
     addToMap(mo) {
         if (mo.otherDirection) {
@@ -70,10 +98,12 @@ class World {
         this.ctx.translate(mo.width, 0);
         this.ctx.scale(-1, 1);
         mo.x = mo.x * -1;
+        mo.x_Rect = (mo.x_Rect - mo.width_Rect + 10) * -1;
     }
 
     flipImageBack(mo) {
         mo.x = mo.x * -1;
+        mo.x_Rect = (mo.x_Rect - mo.width_Rect + 10) * -1;
         this.ctx.restore();
     }
 }

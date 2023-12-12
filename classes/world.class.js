@@ -2,22 +2,19 @@ class World {
     character = new Character();
     statusbar = new Statusbar(
         [
-            new EmptyStatusBar(0),
-            new EmptyStatusBar(40),
-            new EmptyStatusBar(80)
+            new EmptyStatusBar(30, 30),
+            new EmptyStatusBar(70, 30),
+            new EmptyStatusBar(110, 30)
+        ],
+        [
+            new IconStatusBar('img/7_statusbars/3_icons/icon_salsa_bottle.png', 10, 19, 50, 18),
+            new IconStatusBar('img/7_statusbars/3_icons/icon_health.png', 65, 10, 32, 40),
+            new IconStatusBar('img/7_statusbars/3_icons/icon_coin.png', 105, 10, 32, 40)
         ],
         [
             new HealthBar()
-        ],
-        [
-            new CoinBar()
-        ],
-        [
-            new SalsaBar()
-        ],
-        [
-            new HealthEndBossBar()
         ]
+
     );
 
     camera_x = 0;
@@ -50,6 +47,8 @@ class World {
         this.ctx.translate(-this.camera_x, 0);
         this.addObjectsToMap(this.statusbar.emptyStatusBar);
         this.addObjectsToMap(this.statusbar.healthStatusBar);
+        this.addObjectsToMap(this.statusbar.iconStatusBar);
+
         //this.addObjectsToMap(this.statusbar.coinStatusBar);
         //this.addObjectsToMap(this.statusbar.salsaStatusBar);
         //this.addObjectsToMap(this.statusbar.healthEndBossStatusBar);
@@ -66,9 +65,8 @@ class World {
         setInterval(() => {
             this.level.enemies.forEach((enemy) => {
                 if (this.character.isColliding(enemy)) {
-
                     this.character.hit();
-                    console.log('Collidiert', this.character.energy);
+                    this.statusbar.loadEnergy(this.character.energy);
                 }
             });
         }, 1000 / 25)

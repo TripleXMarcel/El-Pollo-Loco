@@ -35,6 +35,7 @@ class DrawableObject {
             ctx.rect(this.x_Rect, this.y_Rect, this.width_Rect, this.height_Rect);
             ctx.stroke();
         }
+        
 
     }
 }

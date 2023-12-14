@@ -185,6 +185,5 @@ const level1 = new Level(
     new Bottle('img/6_salsa_bottle/2_salsa_bottle_on_ground.png', 10),
     new Bottle('img/6_salsa_bottle/1_salsa_bottle_on_ground.png', 11),
     new Bottle('img/6_salsa_bottle/2_salsa_bottle_on_ground.png', 12),
-    new Bottle('img/6_salsa_bottle/1_salsa_bottle_on_ground.png', 13),
-    new Bottle('img/6_salsa_bottle/2_salsa_bottle_on_ground.png', 14)
+    new Bottle('img/6_salsa_bottle/1_salsa_bottle_on_ground.png', 13)
 ]);

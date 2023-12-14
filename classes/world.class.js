@@ -10,12 +10,11 @@ class World {
             new IconStatusBar('img/7_statusbars/3_icons/icon_salsa_bottle.png', 10, 19, 50, 18),
             new IconStatusBar('img/7_statusbars/3_icons/icon_health.png', 65, 10, 32, 40),
             new IconStatusBar('img/7_statusbars/3_icons/icon_coin.png', 105, 10, 32, 40)
-        ],
-        [
-            new HealthBar()
         ]
-
     );
+    healthBar = new HealthBar();
+    coinBar = new CoinBar();
+    salsaBar = new SalsaBar();
 
     camera_x = 0;
 
@@ -46,11 +45,13 @@ class World {
         this.addObjectsToMap(this.level.bottle);
         this.ctx.translate(-this.camera_x, 0);
         this.addObjectsToMap(this.statusbar.emptyStatusBar);
-        this.addObjectsToMap(this.statusbar.healthStatusBar);
+        this.addToMap(this.healthBar);
+        this.addToMap(this.coinBar);
+        this.addToMap(this.salsaBar);
         this.addObjectsToMap(this.statusbar.iconStatusBar);
 
-        //this.addObjectsToMap(this.statusbar.coinStatusBar);
-        //this.addObjectsToMap(this.statusbar.salsaStatusBar);
+        
+        
         //this.addObjectsToMap(this.statusbar.healthEndBossStatusBar);
         this.ctx.translate(this.camera_x, 0);
         this.addToMap(this.character);
@@ -63,13 +64,36 @@ class World {
 
     checkCollisions() {
         setInterval(() => {
+            let i = 0;
             this.level.enemies.forEach((enemy) => {
+                if (this.character.isCollidingTop(enemy)) {
+                        this.character.kill(i);
+                        console.log('what1');
+                }else
                 if (this.character.isColliding(enemy)) {
                     this.character.hit();
-                    this.statusbar.loadEnergy(this.character.energy);
+                    this.healthBar.loadEnergy(this.character.energy);
                 }
+                i++
+            });
+            i=0;
+            this.level.coins.forEach((coin) => {
+                if (this.character.isColliding(coin)) {
+                    this.character.collectCoin(i);
+                    this.coinBar.loadCoins(this.character.coin, this.level.coins.length);
+                }
+                i++;
+            });
+            i=0;
+            this.level.bottle.forEach((salsa) => {
+                if (this.character.isColliding(salsa)) {
+                    this.character.collectSalsa(i);
+                    this.salsaBar.loadSalsa(this.character.salsa, this.level.bottle.length);
+                }
+                i++;
             });
         }, 1000 / 25)
+        
     }
 
     addObjectsToMap(objects) {
@@ -77,8 +101,6 @@ class World {
             this.addToMap(o)
         });
     }
-
-
 
     addToMap(mo) {
         if (mo.otherDirection) {

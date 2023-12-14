@@ -9,9 +9,8 @@ class Character extends MovableObject {
     width_Rect = 50;
     speed = 10;
     speedY = 0;
+    onCollisionCourse = false;
     acceleration = 2.5;
-    coin = 12;
-    salsa = 6;
     IMAGES_WALKING = [
         'img/2_character_pepe/2_walk/W-21.png',
         'img/2_character_pepe/2_walk/W-22.png',
@@ -93,9 +92,13 @@ class Character extends MovableObject {
                 this.y_Rect -= this.speedY;
                 this.speedY -= this.acceleration;
             }
+            if (this.speedY <= 0 && this.isAboveGrove()) {
+                this.onCollisionCourse = true;
+            }
             if (!this.isAboveGrove()) {
                 this.y = 200;
                 this.y_Rect = 290;
+                this.onCollisionCourse = false;
             }
         }, 1000 / 50);
     }

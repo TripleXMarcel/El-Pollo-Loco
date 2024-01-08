@@ -1,9 +1,9 @@
 class Cloud extends MovableObject {
-    y= 20;
+    y = 20;
     width = 500;
     height = 200;
     speed = 0.2;
-    
+
 
     constructor(url, x) {
         super().loadImage(url);
@@ -11,11 +11,17 @@ class Cloud extends MovableObject {
         this.animate();
     }
 
-    animate(){
+    animate() {
         this.speed = this.speed + Math.random() * 0.2;
         setInterval(() => {
-            this.moveLeft();
-            this.otherDirection = false;
-        }, 1000 / 60);
+            if (this.x > -1000) {
+                this.moveLeft();
+                this.otherDirection = false;
+            }
+            else{
+                this.x = (719 * 20) + Math.random() * 500;
+            }
+
+        }, 1000/60);
     }
 }

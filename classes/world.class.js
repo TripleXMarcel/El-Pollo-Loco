@@ -67,8 +67,8 @@ class World {
             let i = 0;
             this.level.enemies.forEach((enemy) => {
                 if (this.character.isCollidingTop(enemy)) {
-                        this.character.kill(i);
-                        console.log('what1');
+                        enemy.kill(i);
+                        this.character.speedY = 25;
                 }else
                 if (this.character.isColliding(enemy)) {
                     this.character.hit();
@@ -106,7 +106,7 @@ class World {
         if (mo.otherDirection) {
             this.flipImage(mo);
         }
-        mo.drawFrame(this.ctx);
+        //mo.drawFrame(this.ctx);
         mo.draw(this.ctx);
         if (mo.otherDirection) {
             this.flipImageBack(mo);

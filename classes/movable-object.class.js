@@ -6,8 +6,8 @@ class MovableObject extends DrawableObject {
     energy = 100;
     coin = 0;
     salsa = 0;
-
     lastHit = 0;
+    dead=false;
 
 
 
@@ -53,7 +53,7 @@ class MovableObject extends DrawableObject {
             this.lastHit = new Date().getTime();
         }
     }
-    kill(i) {
+    kill() {
         level1.enemies.splice(i, 1);
     }
     collectCoin(i) {

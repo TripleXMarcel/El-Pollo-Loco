@@ -35,14 +35,14 @@ class MovableObject extends DrawableObject {
     }
 
     isCollidingTop(obj) {
-        return (this.x_Rect + this.width_Rect) >= obj.x_Rect && this.x_Rect <= (obj.x_Rect + obj.width_Rect) && 
-        (this.y_Rect + this.height_Rect) >= obj.y_Rect &&
-        (this.y_Rect) <= (obj.y_Rect + obj.height_Rect) && this.onCollisionCourse;
+        return (this.x_Rect + this.width_Rect) >= obj.x_Rect && this.x_Rect <= (obj.x_Rect + obj.width_Rect) &&
+            (this.y_Rect + this.height_Rect) >= obj.y_Rect &&
+            (this.y_Rect) <= (obj.y_Rect + obj.height_Rect) && this.onCollisionCourse;
     }
     isColliding(obj) {
-        return (this.x_Rect + this.width_Rect) >= obj.x_Rect && this.x_Rect <= (obj.x_Rect + obj.width_Rect) && 
-        (this.y_Rect + this.height_Rect) >= obj.y_Rect &&
-        (this.y_Rect) <= (obj.y_Rect + obj.height_Rect) && !this.onCollisionCourse;
+        return (this.x_Rect + this.width_Rect) >= obj.x_Rect && this.x_Rect <= (obj.x_Rect + obj.width_Rect) &&
+            (this.y_Rect + this.height_Rect) >= obj.y_Rect &&
+            (this.y_Rect) <= (obj.y_Rect + obj.height_Rect) && !this.onCollisionCourse;
     }
     hit() {
         this.energy -= 1;

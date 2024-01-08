@@ -12,9 +12,6 @@ const level1 = new Level(
     new Chicken(7),
     new Chicken(7),
     new Chicken(7),
-    new Chicken(7),
-    new Chicken(7),
-    new Chicken(7),
     new Chicken(9),
     new Chicken(9),
     new Chicken(9),
@@ -26,13 +23,6 @@ const level1 = new Level(
     new Chicken(10),
     new Chicken(10),
     new Chicken(10),
-    new Chicken(10),
-    new Chicken(10),
-    new Chicken(10),
-    new Chicken(10),
-    new Chicken(11),
-    new Chicken(11),
-    new Chicken(11),
     new Chicken(11),
     new Chicken(11),
     new Chicken(11),
@@ -45,14 +35,7 @@ const level1 = new Level(
     new Chicken(13),
     new Chicken(13),
     new Chicken(13),
-    new Chicken(13),
-    new Chicken(13),
-    new Chicken(13),
-    new Chicken(15),
-    new Chicken(15),
-    new Chicken(15),
-    new Chicken(15),
-    new Chicken(15)
+    new Chicken(13)
 
     ],
     [
@@ -173,6 +156,7 @@ const level1 = new Level(
     new Coin(9),
     new Coin(10)
 ], [
+    new Bottle('img/6_salsa_bottle/1_salsa_bottle_on_ground.png', 0),
     new Bottle('img/6_salsa_bottle/1_salsa_bottle_on_ground.png', 1),
     new Bottle('img/6_salsa_bottle/2_salsa_bottle_on_ground.png', 2),
     new Bottle('img/6_salsa_bottle/1_salsa_bottle_on_ground.png', 3),
@@ -184,6 +168,6 @@ const level1 = new Level(
     new Bottle('img/6_salsa_bottle/1_salsa_bottle_on_ground.png', 9),
     new Bottle('img/6_salsa_bottle/2_salsa_bottle_on_ground.png', 10),
     new Bottle('img/6_salsa_bottle/1_salsa_bottle_on_ground.png', 11),
-    new Bottle('img/6_salsa_bottle/2_salsa_bottle_on_ground.png', 12),
-    new Bottle('img/6_salsa_bottle/1_salsa_bottle_on_ground.png', 13)
+    new Bottle('img/6_salsa_bottle/2_salsa_bottle_on_ground.png', 12)
+    
 ]);

@@ -121,7 +121,7 @@ class Character extends MovableObject {
                 this.walking_sound.play();
             }
             if (this.world.keyboard.SPACE && !this.isAboveGrove()) {
-                this.speedY = 27;
+                this.speedY = 20;
             } 
 
 
@@ -147,7 +147,7 @@ class Character extends MovableObject {
         }
 
 
-            , 50);
+            , 100);
 
     }
 

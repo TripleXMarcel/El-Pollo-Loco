@@ -50,8 +50,8 @@ class World {
         this.addToMap(this.salsaBar);
         this.addObjectsToMap(this.statusbar.iconStatusBar);
 
-        
-        
+
+
         //this.addObjectsToMap(this.statusbar.healthEndBossStatusBar);
         this.ctx.translate(this.camera_x, 0);
         this.addToMap(this.character);
@@ -64,36 +64,38 @@ class World {
 
     checkCollisions() {
         setInterval(() => {
-            let i = 0;
-            this.level.enemies.forEach((enemy) => {
-                if (this.character.isCollidingTop(enemy)) {
-                        enemy.kill(i);
-                        this.character.speedY = 25;
-                }else
+            this.collidingEnemy();
+            this.collidingCollectable();
+        }, 1000 / 60)
+
+    }
+
+    collidingEnemy() {
+        this.level.enemies.forEach((enemy, i) => {
+            if (this.character.isCollidingTop(enemy)) {
+                enemy.kill(i);
+                this.character.speedY = 25;
+            } else
                 if (this.character.isColliding(enemy)) {
                     this.character.hit();
                     this.healthBar.loadEnergy(this.character.energy);
                 }
-                i++
-            });
-            i=0;
-            this.level.coins.forEach((coin) => {
+        });
+    }
+
+    collidingCollectable(){
+        this.level.coins.forEach((coin, i) => {
                 if (this.character.isColliding(coin)) {
                     this.character.collectCoin(i);
                     this.coinBar.loadCoins(this.character.coin, this.level.coins.length);
                 }
-                i++;
             });
-            i=0;
-            this.level.bottle.forEach((salsa) => {
+            this.level.bottle.forEach((salsa, i) => {
                 if (this.character.isColliding(salsa)) {
                     this.character.collectSalsa(i);
                     this.salsaBar.loadSalsa(this.character.salsa, this.level.bottle.length);
                 }
-                i++;
             });
-        }, 1000 / 60)
-        
     }
 
     addObjectsToMap(objects) {

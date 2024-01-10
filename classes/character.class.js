@@ -7,10 +7,15 @@ class Character extends MovableObject {
     x_Rect = 140;
     height_Rect = 130;
     width_Rect = 50;
+    y_Rect_Top = 410;
+    x_Rect_Top = 140;
+    height_Rect_Top = 10;
+    width_Rect_Top = 50
     speed = 10;
     speedY = 0;
     onCollisionCourse = false;
     acceleration = 2.5;
+    jump = false;
     IMAGES_WALKING = [
         'img/2_character_pepe/2_walk/W-21.png',
         'img/2_character_pepe/2_walk/W-22.png',
@@ -87,25 +92,19 @@ class Character extends MovableObject {
 
     applyGravity() {
         setInterval(() => {
-            if (this.isAboveGrove() || this.speedY > 0) {
+            if (this.jump === true) {
                 this.y -= this.speedY;
                 this.y_Rect -= this.speedY;
+                this.y_Rect_Top -= this.speedY;
                 this.speedY -= this.acceleration;
+
             }
-            if (this.speedY <= 0 && this.isAboveGrove()) {
+            if (this.jump === true && this.speedY < 0) {
                 this.onCollisionCourse = true;
-            }
-            if (!this.isAboveGrove()) {
-                this.y = 200;
-                this.y_Rect = 290;
-                this.onCollisionCourse = false;
             }
         }, 1000 / 50);
     }
 
-    isAboveGrove() {
-        return this.y < 200;
-    }
 
     animate() {
 
@@ -115,14 +114,15 @@ class Character extends MovableObject {
             if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
                 this.moveRight();
                 this.walking_sound.play();
-            } 
+            }
             if (this.world.keyboard.LEFT && this.x > 0) {
                 this.moveLeft();
                 this.walking_sound.play();
             }
-            if (this.world.keyboard.SPACE && !this.isAboveGrove()) {
+            if (this.world.keyboard.SPACE && this.jump === false) {
                 this.speedY = 25;
-            } 
+                this.jump = true;
+            }
 
 
             this.world.camera_x = -this.x + 120;
@@ -134,14 +134,14 @@ class Character extends MovableObject {
                 this.playAnimation(this.IMAGES_DEAD);
             } else if (this.isHurt()) {
                 this.playAnimation(this.IMAGES_HURT);
-            } else if (this.isAboveGrove() && this.speedY > 0) {
+            } else if (this.jump === true && this.speedY > 0) {
                 this.playAnimation(this.IMAGES_JUMPING_UP);
-            } else if (this.isAboveGrove() && this.speedY < 0) {
+            } else if (this.jump === true && this.speedY < 0) {
                 this.playAnimation(this.IMAGES_JUMPING_DOWN);
             }
             else if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x || this.world.keyboard.LEFT && this.x > 0) {
                 this.playAnimation(this.IMAGES_WALKING);
-            }else {
+            } else {
                 this.playAnimation(this.IMAGES_IDLE);
             }
         }

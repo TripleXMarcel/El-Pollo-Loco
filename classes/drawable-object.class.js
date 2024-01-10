@@ -28,11 +28,11 @@ class DrawableObject {
         ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
     }
     drawFrame(ctx) {
-        if (this instanceof Character || this instanceof Chicken) {
+        if (this instanceof Character || this instanceof FrontObject) {
             ctx.beginPath();
             ctx.lineWidth = '5';
             ctx.strokeStyle = 'blue';
-            ctx.rect(this.x_Rect, this.y_Rect, this.width_Rect, this.height_Rect);
+            ctx.rect(this.x_Rect_Top, this.y_Rect_Top, this.width_Rect_Top, this.height_Rect_Top);
             ctx.stroke();
         }
     }

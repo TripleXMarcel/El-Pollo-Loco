@@ -169,5 +169,20 @@ const level1 = new Level(
     new Bottle('img/6_salsa_bottle/2_salsa_bottle_on_ground.png', 10),
     new Bottle('img/6_salsa_bottle/1_salsa_bottle_on_ground.png', 11),
     new Bottle('img/6_salsa_bottle/2_salsa_bottle_on_ground.png', 12)
-    
+
+], [
+    new FrontObject('img/desert_objects/Tile/2.png', -200, 400),
+    new FrontObject('img/desert_objects/Tile/2.png', -100, 400),
+    new FrontObject('img/desert_objects/Tile/2.png', 0, 400),
+    new FrontObject('img/desert_objects/Tile/2.png', 100, 400),
+    new FrontObject('img/desert_objects/Tile/2.png', 200, 400),
+    new FrontObject('img/desert_objects/Tile/7.png', 300, 400),
+    new FrontObject('img/desert_objects/Tile/1.png', 400, 300),
+    new FrontObject('img/desert_objects/Tile/8.png', 400, 400),
+    new FrontObject('img/desert_objects/Tile/5.png', 500, 400),
+    new FrontObject('img/desert_objects/Tile/5.png', 600, 400),
+    new FrontObject('img/desert_objects/Tile/5.png', 700, 400),
+    new FrontObject('img/desert_objects/Tile/2.png', 500, 300),
+    new FrontObject('img/desert_objects/Tile/2.png', 600, 300),
+    new FrontObject('img/desert_objects/Tile/2.png', 700, 300),
 ]);

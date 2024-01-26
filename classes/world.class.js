@@ -39,7 +39,6 @@ class World {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.ctx.translate(this.camera_x, 0);
         this.addObjectsToMap(this.level.backgroundObjects);
-        this.addObjectsToMap(this.level.frontObjects);
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.level.clouds);
         this.addObjectsToMap(this.level.coins);
@@ -67,7 +66,6 @@ class World {
         setInterval(() => {
             this.collidingEnemy();
             this.collidingCollectable();
-            this.collidingObject();
         }, 1000 / 60)
 
     }
@@ -100,16 +98,6 @@ class World {
             });
     }
 
-    collidingObject(){
-        this.level.frontObjects.forEach((frontObjects)=>{
-            if(this.character.isCollidingTopOBJ(frontObjects)){
-                this.character.speedY = 0;
-                this.character.onCollisionCourse = false;
-                this.character.jump = false;
-            }
-        })
-    }
-
     addObjectsToMap(objects) {
         objects.forEach(o => {
             this.addToMap(o)
@@ -120,7 +108,7 @@ class World {
         if (mo.otherDirection) {
             this.flipImage(mo);
         }
-        mo.drawFrame(this.ctx);
+        //mo.drawFrame(this.ctx);
         mo.draw(this.ctx);
         if (mo.otherDirection) {
             this.flipImageBack(mo);
@@ -133,13 +121,11 @@ class World {
         this.ctx.scale(-1, 1);
         mo.x = mo.x * -1;
         mo.x_Rect = (mo.x_Rect - mo.width_Rect + 10) * -1;
-        mo.x_Rect_Top = (mo.x_Rect_Top - mo.width_Rect_Top + 10) * -1;
     }
 
     flipImageBack(mo) {
         mo.x = mo.x * -1;
         mo.x_Rect = (mo.x_Rect - mo.width_Rect + 10) * -1;
-        mo.x_Rect_Top = (mo.x_Rect_Top - mo.width_Rect_Top + 10) * -1;
         this.ctx.restore();
     }
 }

@@ -45,7 +45,7 @@ class MovableObject extends DrawableObject {
             (this.y_Rect) <= (obj.y_Rect + obj.height_Rect) && !this.onCollisionCourse;
     }
     hit() {
-        this.energy -= 1;
+        this.energy -= 0.2;
         if (this.energy < 0) {
             this.energy = 0;
         }

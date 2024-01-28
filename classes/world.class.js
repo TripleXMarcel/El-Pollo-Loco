@@ -15,7 +15,7 @@ class World {
     healthBar = new HealthBar();
     coinBar = new CoinBar();
     salsaBar = new SalsaBar();
-
+    x;
     camera_x = 0;
 
     level = level1;
@@ -66,7 +66,12 @@ class World {
         setInterval(() => {
             this.collidingEnemy();
             this.collidingCollectable();
+<<<<<<< Updated upstream
         }, 1000 / 60)
+=======
+            this.collidingObject();
+        }, 1000 / 200)
+>>>>>>> Stashed changes
 
     }
 
@@ -83,21 +88,41 @@ class World {
         });
     }
 
-    collidingCollectable(){
+    collidingCollectable() {
         this.level.coins.forEach((coin, i) => {
-                if (this.character.isColliding(coin)) {
-                    this.character.collectCoin(i);
-                    this.coinBar.loadCoins(this.character.coin, this.level.coins.length);
-                }
-            });
-            this.level.bottle.forEach((salsa, i) => {
-                if (this.character.isColliding(salsa)) {
-                    this.character.collectSalsa(i);
-                    this.salsaBar.loadSalsa(this.character.salsa, this.level.bottle.length);
-                }
-            });
+            if (this.character.isColliding(coin)) {
+                this.character.collectCoin(i);
+                this.coinBar.loadCoins(this.character.coin, this.level.coins.length);
+            }
+        });
+        this.level.bottle.forEach((salsa, i) => {
+            if (this.character.isColliding(salsa)) {
+                this.character.collectSalsa(i);
+                this.salsaBar.loadSalsa(this.character.salsa, this.level.bottle.length);
+            }
+        });
     }
 
+<<<<<<< Updated upstream
+=======
+    collidingObject() {
+        this.level.frontObjects.forEach((frontObjects) => {
+            if (this.character.isCollidingTopOBJ(frontObjects)) {
+                this.x = true;
+            }
+        })
+        if (this.x === true) {
+            this.character.speedY = 0;
+            this.character.onCollisionCourse = false;
+            this.character.jump = false;
+        }
+        else {
+            this.character.jump = true;
+        }
+        this.x = false;
+    }
+
+>>>>>>> Stashed changes
     addObjectsToMap(objects) {
         objects.forEach(o => {
             this.addToMap(o)

@@ -34,6 +34,15 @@ class MovableObject extends DrawableObject {
         this.currentImage++;
     }
 
+<<<<<<< Updated upstream
+=======
+    isCollidingTopOBJ(obj) {
+        return (this.x_Rect + this.width_Rect) >= obj.x_Rect_Top && this.x_Rect_Top <= (obj.x_Rect_Top + obj.width_Rect_Top) &&
+            (this.y_Rect + this.height_Rect) >= obj.y_Rect_Top &&
+            (this.y_Rect) <= (obj.y_Rect_Top + obj.height_Rect_Top) && this.onCollisionCourse;
+    }
+
+>>>>>>> Stashed changes
     isCollidingTop(obj) {
         return (this.x_Rect + this.width_Rect) >= obj.x_Rect && this.x_Rect <= (obj.x_Rect + obj.width_Rect) &&
             (this.y_Rect + this.height_Rect) >= obj.y_Rect &&

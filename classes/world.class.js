@@ -66,12 +66,7 @@ class World {
         setInterval(() => {
             this.collidingEnemy();
             this.collidingCollectable();
-<<<<<<< Updated upstream
         }, 1000 / 60)
-=======
-            this.collidingObject();
-        }, 1000 / 200)
->>>>>>> Stashed changes
 
     }
 
@@ -103,26 +98,6 @@ class World {
         });
     }
 
-<<<<<<< Updated upstream
-=======
-    collidingObject() {
-        this.level.frontObjects.forEach((frontObjects) => {
-            if (this.character.isCollidingTopOBJ(frontObjects)) {
-                this.x = true;
-            }
-        })
-        if (this.x === true) {
-            this.character.speedY = 0;
-            this.character.onCollisionCourse = false;
-            this.character.jump = false;
-        }
-        else {
-            this.character.jump = true;
-        }
-        this.x = false;
-    }
-
->>>>>>> Stashed changes
     addObjectsToMap(objects) {
         objects.forEach(o => {
             this.addToMap(o)

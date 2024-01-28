@@ -15,13 +15,12 @@ class World {
     healthBar = new HealthBar();
     coinBar = new CoinBar();
     salsaBar = new SalsaBar();
-    x;
+
     camera_x = 0;
 
     level = level1;
     canvas;
     ctx;
-    keyboadasdwrd;
     constructor(canvas) {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
@@ -29,6 +28,7 @@ class World {
         this.draw();
         this.setWorld();
         this.checkCollisions();
+        this.level.game=true;
     }
 
     setWorld() {
@@ -83,19 +83,19 @@ class World {
         });
     }
 
-    collidingCollectable() {
+    collidingCollectable(){
         this.level.coins.forEach((coin, i) => {
-            if (this.character.isColliding(coin)) {
-                this.character.collectCoin(i);
-                this.coinBar.loadCoins(this.character.coin, this.level.coins.length);
-            }
-        });
-        this.level.bottle.forEach((salsa, i) => {
-            if (this.character.isColliding(salsa)) {
-                this.character.collectSalsa(i);
-                this.salsaBar.loadSalsa(this.character.salsa, this.level.bottle.length);
-            }
-        });
+                if (this.character.isColliding(coin)) {
+                    this.character.collectCoin(i);
+                    this.coinBar.loadCoins(this.character.coin, this.level.coins.length);
+                }
+            });
+            this.level.bottle.forEach((salsa, i) => {
+                if (this.character.isColliding(salsa)) {
+                    this.character.collectSalsa(i);
+                    this.salsaBar.loadSalsa(this.character.salsa, this.level.bottle.length);
+                }
+            });
     }
 
     addObjectsToMap(objects) {

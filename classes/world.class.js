@@ -15,24 +15,58 @@ class World {
     healthBar = new HealthBar();
     coinBar = new CoinBar();
     salsaBar = new SalsaBar();
-
+    levels = [level1];
     camera_x = 0;
-
-    level = level1;
+    intervalIds;
+    interval;
+    level;
     canvas;
     ctx;
-    constructor(canvas) {
+    constructor(canvas, level) {
+        this.level = this.levels[level];
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
         this.keyboard = keyboard;
         this.draw();
         this.setWorld();
         this.checkCollisions();
-        this.level.game=true;
+        this.level.game = true;
     }
 
     setWorld() {
         this.character.world = this;
+    }
+
+    pause() {
+        this.intervalIds = [this.level.clouds, this.level.enemies, this.character];
+        for (var i = 0; i < this.intervalIds.length; i++) {
+            if (this.intervalIds[i].length) {
+                for (let j = 0; j < this.intervalIds[i].length; j++) {
+                    clearInterval(this.intervalIds[i][j].interval);
+                    clearInterval(this.intervalIds[i][j].interval2);
+                    clearInterval(this.intervalIds[i][j].interval3)
+                }
+            } else {
+                clearInterval(this.intervalIds[i].interval);
+                clearInterval(this.intervalIds[i].interval2);
+                clearInterval(this.intervalIds[i].interval3)
+            }
+            clearInterval(this.interval);
+        }
+    }
+
+    unpause() {
+        this.intervalIds = [this.level.clouds, this.level.enemies, this.character];
+        for (var i = 0; i < this.intervalIds.length; i++) {
+            if (this.intervalIds[i].length) {
+                for (let j = 0; j < this.intervalIds[i].length; j++) {
+                    this.intervalIds[i][j].animate();
+                }
+            } else {
+                this.intervalIds[i].animate();
+            }
+        }
+        this.checkCollisions();
     }
 
     draw() {
@@ -63,7 +97,7 @@ class World {
     }
 
     checkCollisions() {
-        setInterval(() => {
+        this.interval = setInterval(() => {
             this.collidingEnemy();
             this.collidingCollectable();
         }, 1000 / 60)
@@ -83,19 +117,19 @@ class World {
         });
     }
 
-    collidingCollectable(){
+    collidingCollectable() {
         this.level.coins.forEach((coin, i) => {
-                if (this.character.isColliding(coin)) {
-                    this.character.collectCoin(i);
-                    this.coinBar.loadCoins(this.character.coin, this.level.coins.length);
-                }
-            });
-            this.level.bottle.forEach((salsa, i) => {
-                if (this.character.isColliding(salsa)) {
-                    this.character.collectSalsa(i);
-                    this.salsaBar.loadSalsa(this.character.salsa, this.level.bottle.length);
-                }
-            });
+            if (this.character.isColliding(coin)) {
+                this.character.collectCoin(i);
+                this.coinBar.loadCoins(this.character.coin, this.level.coins.length);
+            }
+        });
+        this.level.bottle.forEach((salsa, i) => {
+            if (this.character.isColliding(salsa)) {
+                this.character.collectSalsa(i);
+                this.salsaBar.loadSalsa(this.character.salsa, this.level.bottle.length);
+            }
+        });
     }
 
     addObjectsToMap(objects) {

@@ -11,6 +11,8 @@ class Character extends MovableObject {
     speedY = 0;
     onCollisionCourse = false;
     acceleration = 2.5;
+    interval;
+    interval2;
     IMAGES_WALKING = [
         'img/2_character_pepe/2_walk/W-21.png',
         'img/2_character_pepe/2_walk/W-22.png',
@@ -109,7 +111,7 @@ class Character extends MovableObject {
 
     animate() {
 
-        setInterval(() => {
+        this.interval = setInterval(() => {
             this.walking_sound.pause();
             this.walking_sound.volume = 0.1;
             if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
@@ -129,7 +131,7 @@ class Character extends MovableObject {
 
 
         }, 1000 / 60);
-        setInterval(() => {
+        this.interval2 = setInterval(() => {
             if (this.isDead()) {
                 this.playAnimation(this.IMAGES_DEAD);
             } else if (this.isHurt()) {

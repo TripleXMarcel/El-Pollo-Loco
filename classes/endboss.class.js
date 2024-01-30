@@ -3,6 +3,7 @@ class Endboss extends MovableObject{
     height = 400;
     width = 400;
     healthEndBoss=100;
+    interval;
    
 
     IMAGES_ALERT = [
@@ -52,7 +53,7 @@ class Endboss extends MovableObject{
     }
 
     animate() {
-        setInterval(() => {
+        this.interval = setInterval(() => {
             this.playAnimation(this.IMAGES_ALERT);
         }, 200);
     }

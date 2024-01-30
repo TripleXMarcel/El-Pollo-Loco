@@ -1,24 +1,19 @@
 let canvas;
 let ctx;
 let world;
+let menu;
+
 let keyboard = new Keyboard();
-let gameOn = false;
 
 
 function init() {
     canvas = document.getElementById('canvas');
     startScreen = new StartScreen(canvas);
-    document.addEventListener('keydown', function (e) {
-        if (e.key === 'Enter' && gameOn === false) {
-            loadScript('levels/level1.js', function () {
-                startGame();
-                gameOn = true;
-            });
-
-        }
-    });
-
+    setTimeout(() => {
+        loadMenu();
+    }, 4000);
 }
+
 
 function loadScript(url, callback) {
     var script = document.createElement('script');
@@ -28,9 +23,18 @@ function loadScript(url, callback) {
     document.head.appendChild(script);
 }
 
-function startGame() {
-    world = new World(canvas, keyboard);
+function loadMenu() {
+    loadScript('levels/menu.js', function () {
+        menu = new Menu(canvas, keyboard);
+    });
 }
+
+function startGame() {
+    loadScript('levels/level1.js', function () {
+        world = new World(canvas, 0, keyboard);
+    });
+}
+
 
 document.addEventListener('keydown', (e) => {
     if (e.key == 'ArrowUp' || e.key == 'w') {

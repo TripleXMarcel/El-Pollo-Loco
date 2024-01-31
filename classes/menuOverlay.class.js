@@ -1,9 +1,11 @@
-class MenuOverlay{
+class MenuOverlay {
     clouds;
     backgroundObjects;
+    buttons;
 
-    constructor(clouds, backgroundObjects){
-        this.clouds=clouds;
-        this.backgroundObjects=backgroundObjects;
+    constructor(clouds, backgroundObjects, buttons) {
+        this.clouds = clouds;
+        this.backgroundObjects = backgroundObjects;
+        this.buttons = buttons
     }
 }

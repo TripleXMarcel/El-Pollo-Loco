@@ -1,43 +1,7 @@
-let level1;
-function loadLevel1(){
+let level2;
+function loadLevel2(){
     return new Level(
-        [new Endboss(),
-        new Chicken(2),
-        new Chicken(2),
-        new Chicken(4),
-        new Chicken(4),
-        new Chicken(4),
-        new Chicken(4),
-        new Chicken(5),
-        new Chicken(5),
-        new Chicken(7),
-        new Chicken(7),
-        new Chicken(7),
-        new Chicken(7),
-        new Chicken(9),
-        new Chicken(9),
-        new Chicken(9),
-        new Chicken(9),
-        new Chicken(9),
-        new Chicken(10),
-        new Chicken(10),
-        new Chicken(10),
-        new Chicken(10),
-        new Chicken(10),
-        new Chicken(10),
-        new Chicken(11),
-        new Chicken(11),
-        new Chicken(11),
-        new Chicken(11),
-        new Chicken(11),
-        new Chicken(11),
-        new Chicken(12),
-        new Chicken(12),
-        new Chicken(12),
-        new Chicken(13),
-        new Chicken(13),
-        new Chicken(13),
-        new Chicken(13)
+        [new Endboss()
     
         ],
         [
@@ -82,7 +46,7 @@ function loadLevel1(){
             new Cloud('img/5_background/layers/4_clouds/1.png', 19),
             new Cloud('img/5_background/layers/4_clouds/2.png', 19),
             new Cloud('img/5_background/layers/4_clouds/1.png', 20),
-            new Cloud('img/5_background/layers/4_clouds/2.png', 20),
+            new Cloud('img/5_background/layers/4_clouds/2.png', 20)
     
         ],
         [
@@ -174,4 +138,6 @@ function loadLevel1(){
         
     ]);
 }
+
+
 

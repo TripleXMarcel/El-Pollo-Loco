@@ -15,22 +15,26 @@ class World {
     healthBar = new HealthBar();
     coinBar = new CoinBar();
     salsaBar = new SalsaBar();
-    levels = [level1];
+    levels = [level1, level2];
     camera_x = 0;
     intervalIds;
     interval;
-    level;
+    level = level1;
     canvas;
     ctx;
-    constructor(canvas, level) {
-        this.level = this.levels[level];
+    gameOn;
+    dead;
+    constructor(canvas) {
+        this.gameOn = true;
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
         this.keyboard = keyboard;
+        this.unpause();
         this.draw();
         this.setWorld();
         this.checkCollisions();
         this.level.game = true;
+        this.dead = false;
     }
 
     setWorld() {
@@ -69,7 +73,22 @@ class World {
         this.checkCollisions();
     }
 
+    characterDead() {
+        setTimeout(() => {
+            this.pause();
+            this.dead = true;
+        }, 500);
+    }
+
+    closeGame() {
+        this.gameOn = false;
+        this.pause();
+    }
+
     draw() {
+        if (!this.gameOn) {
+            return;
+        }
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.ctx.translate(this.camera_x, 0);
         this.addObjectsToMap(this.level.backgroundObjects);
@@ -88,7 +107,10 @@ class World {
 
         //this.addObjectsToMap(this.statusbar.healthEndBossStatusBar);
         this.ctx.translate(this.camera_x, 0);
-        this.addToMap(this.character);
+        if (!this.dead) {
+            this.addToMap(this.character);
+        }
+
         this.ctx.translate(-this.camera_x, 0);
         let self = this;
         requestAnimationFrame(function () {
@@ -107,7 +129,7 @@ class World {
     collidingEnemy() {
         this.level.enemies.forEach((enemy, i) => {
             if (this.character.isCollidingTop(enemy)) {
-                enemy.kill(i);
+                enemy.kill(i, this.level);
                 this.character.speedY = 25;
             } else
                 if (this.character.isColliding(enemy)) {
@@ -120,13 +142,13 @@ class World {
     collidingCollectable() {
         this.level.coins.forEach((coin, i) => {
             if (this.character.isColliding(coin)) {
-                this.character.collectCoin(i);
+                this.character.collectCoin(i, this.level);
                 this.coinBar.loadCoins(this.character.coin, this.level.coins.length);
             }
         });
         this.level.bottle.forEach((salsa, i) => {
             if (this.character.isColliding(salsa)) {
-                this.character.collectSalsa(i);
+                this.character.collectSalsa(i, this.level);
                 this.salsaBar.loadSalsa(this.character.salsa, this.level.bottle.length);
             }
         });

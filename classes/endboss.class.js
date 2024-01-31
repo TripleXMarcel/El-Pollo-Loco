@@ -45,7 +45,6 @@ class Endboss extends MovableObject{
 
     constructor(){
         super().loadImage(this.IMAGES_ALERT[0]);
-        this.animate();
         this.loadImages(this.IMAGES_ALERT);
        
         

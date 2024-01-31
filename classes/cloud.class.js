@@ -5,12 +5,9 @@ class Cloud extends MovableObject {
     speed = 0.2;
     interval;
 
-    constructor(url, x, animation) {
+    constructor(url, x) {
         super().loadImage(url);
         this.x = (719 * x) + Math.random() * 500;
-        if (animation == true) {
-            this.animate();
-        }
     }
 
     animate() {

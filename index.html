@@ -28,12 +28,24 @@
     <script src="classes/coins.class.js"></script>
     <script src="classes/bottle.class.js"></script>
     <script src="classes/startScreen.class.js"></script>
+    <script src="levels/level1.js"></script>
+    <script src="levels/level2.js"></script>
     <script src="js\game.js"></script>
 </head>
 
 <body onload="init()">
     <canvas id="canvas" width="720" height="480"></canvas>
-
+    <div class="buttonsMenu">
+        <div class="levelSelection">
+            <button onclick="levelSelection('down')">links</button>
+                <div>
+                    <p>Level 1</p>
+                </div>
+            <button onclick="levelSelection('up')">rechts</button>
+        </div>
+        <button class="startBTN" onclick="startGame()">Start</button>
+        
+    </div>
 
 </body>
 

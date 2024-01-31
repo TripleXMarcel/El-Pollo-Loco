@@ -1,5 +1,4 @@
 class Menu {
-    astra = false;
     menu = menu1;
 
     constructor(canvas) {
@@ -22,6 +21,8 @@ class Menu {
             self.draw();
         });
     }
+
+
     addObjectsToMap(objects) {
         objects.forEach(o => {
             this.addToMap(o)

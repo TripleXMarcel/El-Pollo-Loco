@@ -2,8 +2,8 @@ let canvas;
 let ctx;
 let world;
 let menu;
-
 let keyboard = new Keyboard();
+let level = 1;
 
 
 function init() {
@@ -29,12 +29,32 @@ function loadMenu() {
     });
 }
 
-function startGame() {
-    loadScript('levels/level1.js', function () {
-        world = new World(canvas, 0, keyboard);
-    });
+function levelSelection(x) {
+    if (x == 'up' && level < 2) {
+        level++;
+        console.log(level);
+    }
+    else if (x == 'down' && level > 1) {
+        level--;
+        console.log(level);
+    }
 }
 
+function startGame() {
+    level1 = loadLevel();
+    world = new World(canvas, keyboard);
+}
+
+function loadLevel() {
+    switch (level) {
+        case 1:
+            return loadLevel1();
+        case 2:
+            return loadLevel2();
+        default:
+            break;
+    }
+}
 
 document.addEventListener('keydown', (e) => {
     if (e.key == 'ArrowUp' || e.key == 'w') {

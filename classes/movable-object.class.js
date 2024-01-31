@@ -53,15 +53,15 @@ class MovableObject extends DrawableObject {
             this.lastHit = new Date().getTime();
         }
     }
-    kill() {
-        level1.enemies.splice(i, 1);
+    kill(level) {
+        level.enemies.splice(i, 1);
     }
-    collectCoin(i) {
-        level1.coins.splice(i, 1);
+    collectCoin(i, level) {
+        level.coins.splice(i, 1);
         this.coin++;
     }
-    collectSalsa(j) {
-        level1.bottle.splice(j, 1);
+    collectSalsa(j, level) {
+        level.bottle.splice(j, 1);
         this.salsa++;
     }
     isHurt() {

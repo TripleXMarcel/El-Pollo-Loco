@@ -83,7 +83,6 @@ class Character extends MovableObject {
         this.loadImages(this.IMAGES_DEAD);
         this.loadImages(this.IMAGES_HURT);
         this.loadImages(this.IMAGES_IDLE);
-        this.animate();
         this.applyGravity();
     }
 
@@ -134,6 +133,7 @@ class Character extends MovableObject {
         this.interval2 = setInterval(() => {
             if (this.isDead()) {
                 this.playAnimation(this.IMAGES_DEAD);
+                this.world.characterDead();
             } else if (this.isHurt()) {
                 this.playAnimation(this.IMAGES_HURT);
             } else if (this.isAboveGrove() && this.speedY > 0) {

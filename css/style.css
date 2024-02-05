@@ -1,0 +1,22 @@
+
+body {
+    margin: 0;
+    display: flex;
+    background-color: black;
+    font-family: 'Single Day';
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+}
+
+canvas {
+    position: fixed;
+    border-radius: 30px;
+    background-color: black;
+}
+
+.displayNone {
+    display: none !important;
+}

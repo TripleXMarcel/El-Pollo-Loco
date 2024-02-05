@@ -1,0 +1,122 @@
+p{
+    margin: 0;
+}
+
+input{
+    font-family: 'Single Day';
+}
+
+#menu{
+    height: 480px;
+    width: 720px;
+    border-radius: 30px;
+    position: fixed;
+}
+
+#mainMenu{
+display: flex;
+justify-content: space-between;
+width: 100%;
+height: 100%;
+}
+
+.mainMenu{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 40px;
+    gap: 20px;
+}
+
+.mainMenu button{
+    padding-left: 10px;
+    padding-right: 10px;
+    cursor: pointer;
+    font-family: 'Single Day';
+    font-size: 42px;
+    font-weight: 600;
+    border-radius: 12px;
+    border: 0;
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+.mainMenu button:hover{
+    background-color: rgba(255, 255, 255, 0.75);
+}
+
+.mainMenuControls{
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    margin-right: 40px;
+    margin-bottom: 40px;
+}
+
+#mainMenuControlsBox{
+    border-radius: 12px;
+    background-color: rgba(255, 255, 255, 0.5);
+    padding: 5px;
+}
+
+.mainMenuControlsBox p{
+    margin: 5px;
+    font-size: 28px;
+    font-weight: 600;
+}
+
+#optionsMenu{
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+#options{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 40px;
+    gap: 20px;
+}
+
+#options button{
+    padding-left: 10px;
+    padding-right: 10px;
+    cursor: pointer;
+    font-family: 'Single Day';
+    font-size: 42px;
+    font-weight: 600;
+    border-radius: 12px;
+    border: 0;
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+#levelMenu{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+}
+
+.levelSelection{
+    display: flex;
+}
+
+.levelSelection p{
+    width: 150px;
+    text-align: center;
+}
+
+.levelSelection button{
+    font-family: 'Single Day';
+    cursor: pointer;
+}
+
+.startBTN{
+    cursor: pointer;
+    margin-top: 100px;
+    font-size: 48px;
+    font-weight: bold;
+    border-radius: 12px;
+}

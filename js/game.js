@@ -4,14 +4,22 @@ let world;
 let menu;
 let keyboard = new Keyboard();
 let level = 1;
+let walkLeft = 'a';
+let walkRight = 'd';
+let jump = ' ';
+let throwBottle = 'e'
+let jumpKey = 'Space'
+let autoScale = false;
 
 
 function init() {
     canvas = document.getElementById('canvas');
     startScreen = new StartScreen(canvas);
+    loadControls();
+    scale();
     setTimeout(() => {
         loadMenu();
-    }, 4000);
+    }, 2000);
 }
 
 
@@ -26,24 +34,11 @@ function loadScript(url, callback) {
 function loadMenu() {
     loadScript('levels/menu.js', function () {
         menu = new Menu(canvas, keyboard);
+        openMenu('mainMenu');
     });
 }
 
-function levelSelection(x) {
-    if (x == 'up' && level < 2) {
-        level++;
-        console.log(level);
-    }
-    else if (x == 'down' && level > 1) {
-        level--;
-        console.log(level);
-    }
-}
 
-function startGame() {
-    level1 = loadLevel();
-    world = new World(canvas, keyboard);
-}
 
 function loadLevel() {
     switch (level) {
@@ -63,16 +58,16 @@ document.addEventListener('keydown', (e) => {
     if (e.key == 'ArrowDown' || e.key == 's') {
         keyboard.DOWN = true;
     };
-    if (e.key == 'ArrowLeft' || e.key == 'a') {
+    if (e.key == 'ArrowLeft' || e.key == walkLeft) {
         keyboard.LEFT = true;
     };
-    if (e.key == 'ArrowRight' || e.key == 'd') {
+    if (e.key == 'ArrowRight' || e.key == walkRight) {
         keyboard.RIGHT = true;
     };
-    if (e.key == ' ') {
+    if (e.key == jump) {
         keyboard.SPACE = true;
     };
-    if (e.key == 'Enter') {
+    if (e.key == throwBottle) {
         keyboard.ENTER = true;
     };
     if (e.key == 'Esc') {
@@ -91,16 +86,16 @@ document.addEventListener('keyup', (e) => {
     if (e.key == 'ArrowDown' || e.key == 's') {
         keyboard.DOWN = false;
     };
-    if (e.key == 'ArrowLeft' || e.key == 'a') {
+    if (e.key == 'ArrowLeft' || e.key == walkLeft) {
         keyboard.LEFT = false;
     };
-    if (e.key == 'ArrowRight' || e.key == 'd') {
+    if (e.key == 'ArrowRight' || e.key == walkRight) {
         keyboard.RIGHT = false;
     };
-    if (e.key == ' ') {
+    if (e.key == jump) {
         keyboard.SPACE = false;
     };
-    if (e.key == 'Enter') {
+    if (e.key == throwBottle) {
         keyboard.ENTER = false;
     };
 

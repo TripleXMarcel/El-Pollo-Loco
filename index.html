@@ -5,7 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ElPolloLoco</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/menu.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Single+Day&display=swap" rel="stylesheet">
     <script src="classes/drawable-object.class.js"></script>
     <script src="classes/movable-object.class.js"></script>
     <script src="classes/statusbar.class.js"></script>
@@ -31,20 +35,78 @@
     <script src="levels/level1.js"></script>
     <script src="levels/level2.js"></script>
     <script src="js\game.js"></script>
+    <script src="js\menu.js"></script>
 </head>
 
 <body onload="init()">
     <canvas id="canvas" width="720" height="480"></canvas>
-    <div class="buttonsMenu">
-        <div class="levelSelection">
-            <button onclick="levelSelection('down')">links</button>
+
+    <div id="menu">
+        <div id="levelMenu" class="displayNone">
+            <div class="levelSelection">
+                <button onclick="levelSelection('down')">Vorheriges Level</button>
                 <div>
                     <p>Level 1</p>
                 </div>
-            <button onclick="levelSelection('up')">rechts</button>
+                <button onclick="levelSelection('up')">Nächstes Level</button>
+            </div>
+            <button class="startBTN" onclick="startGame()">Start Game</button>
+            <button onclick="openMenu('mainMenu')">Main Menu</button>
+
         </div>
-        <button class="startBTN" onclick="startGame()">Start</button>
-        
+        <div id="mainMenu" class="displayNone">
+            <div class="mainMenu">
+                <button onclick="openMenu('levelMenu')">New Game</button>
+                <button onclick="openMenu('optionsMenu')">Options</button>
+            </div>
+            <div class="mainMenuControls">
+                <div id="mainMenuControlsBox">
+                    <p>Walk left = A</p>
+                    <p>Walk right = D</p>
+                    <p>Jump = Space</p>
+                    <p>Throw bottle = E</p>
+                </div>
+
+            </div>
+        </div>
+        <div id="optionsMenu" class="displayNone">
+            <div id="options">
+                <button onclick="openSettings('video')">Video</button>
+                <button onclick="openSettings('audio')">Audio</button>
+                <button onclick="openSettings('controls')">Controls</button>
+                <button onclick="openMenu('mainMenu')">Main Menu</button>
+            </div>
+            <div id="video" class="displayNone">
+                <button onclick="setAutoScale()">Auto scale</button>
+                <button onclick="scale(0.5)">360*240 scale 0.5</button>
+                <button onclick="scale(1)">720*480 scale 1</button>
+                <button onclick="scale(1.5)">1080*720 scale 1.5</button>
+                <button onclick="scale(2)">1440*950 scale 2</button>
+            </div>
+            <div id="audio" class="displayNone">
+
+            </div>
+            <div id="controls" class="displayNone">
+                <div>
+                    <p>Walk left</p>
+                    <input id="walkLeft" onkeyup="setControls('walkLeft')" type="text" maxlength="1">
+                </div>
+                <div>
+                    <p>Walk right</p>
+                    <input id="walkRight" onkeyup="setControls('walkRight')" type="text" maxlength="1">
+                </div>
+                <div>
+                    <p>Jump</p>
+                    <input id="jump" onkeyup="setControls('jump')" type="text" maxlength="1">
+                </div>
+                <div>
+                    <p>Throw bottle</p>
+                    <input id="throwBottle" onkeyup="setControls('throwBottle')" type="text" maxlength="1">
+                </div>
+            </div>
+        </div>
+
+
     </div>
 
 </body>

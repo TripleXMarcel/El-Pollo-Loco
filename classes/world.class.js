@@ -122,8 +122,16 @@ class World {
         this.interval = setInterval(() => {
             this.collidingEnemy();
             this.collidingCollectable();
+            this.soundEnemie();
+
         }, 1000 / 60)
 
+    }
+
+    soundEnemie() {
+        for (let i = 0; i < this.level.enemies.length; i++) {
+                this.level.enemies[i].range(this.character.x)
+        }
     }
 
     collidingEnemy() {

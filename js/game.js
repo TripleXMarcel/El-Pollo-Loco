@@ -10,6 +10,10 @@ let jump = ' ';
 let throwBottle = 'e'
 let jumpKey = 'Space'
 let autoScale = false;
+let masterVolume = 50;
+let chickenVolume = 50;
+let playerVolume = 50;
+
 
 
 function init() {

@@ -64,7 +64,7 @@ function setScale(content, scale) {
     let sidebarWidth = document.querySelector('#menu').offsetWidth;
     let transformStringX = 'scale(' + scale + ')';
     if (sidebarHeigth * scale < windowHeigth && sidebarWidth * scale < windowWidth) { container.style.transform = transformStringX; }
-    else{return false};
+    else { return false };
 }
 
 function loadControls() {
@@ -139,4 +139,37 @@ function setControls(x) {
     element.placeholder = element.value;
     element.value = '';
     loadControls();
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+    let masterSlider = document.getElementById("masterVolumeSlider");
+    let chickenSlider = document.getElementById('chickenVolumeSlider');
+    let playerSlider = document.getElementById('playerVolumeSlider');
+    let masterValue = document.getElementById('masterVolumeValue');
+    let chickenValue = document.getElementById('chickenVolumeValue');
+    let playerValue = document.getElementById('playerVolumeValue');
+    masterValue.innerHTML = sliderHTML(masterSlider.value);
+    chickenValue.innerHTML = sliderHTML(chickenSlider.value);
+    playerValue.innerHTML = sliderHTML(playerSlider.value);
+    
+    masterSlider.oninput = function () {
+        masterVolume = masterSlider.value;
+        masterValue.innerHTML = sliderHTML(masterSlider.value);
+    }
+    chickenSlider.oninput = function () {
+        chickenVolume = chickenSlider.value;
+        chickenValue.innerHTML = sliderHTML(chickenSlider.value);
+    }
+    playerSlider.oninput = function () {
+        playerVolume = playerSlider.value;
+        playerValue.innerHTML = sliderHTML(playerSlider.value);
+    }
+});
+
+
+
+function sliderHTML(value) {
+    return `
+            ${value}%
+        `;
 }

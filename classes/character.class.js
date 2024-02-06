@@ -111,20 +111,20 @@ class Character extends MovableObject {
     animate() {
 
         this.interval = setInterval(() => {
-            this.walking_sound.pause();
-            this.walking_sound.volume = 0.1;
+
+            this.walking_sound.volume = ((playerVolume / 100) * masterVolume) / 100;
             if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
                 this.moveRight();
                 this.walking_sound.play();
-            } 
-            if (this.world.keyboard.LEFT && this.x > 0) {
+            }
+            else if (this.world.keyboard.LEFT && this.x > 0) {
                 this.moveLeft();
                 this.walking_sound.play();
             }
+            else { this.walking_sound.pause(); }
             if (this.world.keyboard.SPACE && !this.isAboveGrove()) {
                 this.speedY = 25;
-            } 
-
+            }
 
             this.world.camera_x = -this.x + 120;
 
@@ -143,7 +143,7 @@ class Character extends MovableObject {
             }
             else if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x || this.world.keyboard.LEFT && this.x > 0) {
                 this.playAnimation(this.IMAGES_WALKING);
-            }else {
+            } else {
                 this.playAnimation(this.IMAGES_IDLE);
             }
         }

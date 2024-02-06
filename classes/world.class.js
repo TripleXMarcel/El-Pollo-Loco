@@ -48,7 +48,7 @@ class World {
                 for (let j = 0; j < this.intervalIds[i].length; j++) {
                     clearInterval(this.intervalIds[i][j].interval);
                     clearInterval(this.intervalIds[i][j].interval2);
-                    clearInterval(this.intervalIds[i][j].interval3)
+                    clearInterval(this.intervalIds[i][j].interval3);
                 }
             } else {
                 clearInterval(this.intervalIds[i].interval);
@@ -57,6 +57,7 @@ class World {
             }
             clearInterval(this.interval);
         }
+        this.muteEnemie();
     }
 
     unpause() {
@@ -131,6 +132,12 @@ class World {
     soundEnemie() {
         for (let i = 0; i < this.level.enemies.length; i++) {
                 this.level.enemies[i].range(this.character.x)
+        }
+    }
+
+    muteEnemie() {
+        for (let i = 0; i < this.level.enemies.length; i++) {
+                this.level.enemies[i].muteSound()
         }
     }
 

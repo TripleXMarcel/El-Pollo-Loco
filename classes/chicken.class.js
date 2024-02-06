@@ -8,6 +8,8 @@ class Chicken extends MovableObject {
     width_Rect = 40;
     speed = 0.4;
     energy = 1;
+    maxVolume=0.04;
+    volume=0;
     interval;
     interval2;
     enemieRange;
@@ -31,8 +33,9 @@ class Chicken extends MovableObject {
     animate() {
         this.interval = setInterval(() => {
             if (this.energy === 1) {
-                let volume = (((chickenVolume/100)*masterVolume)/(this.enemieRange/10000))/50000;
-                this.chicken_sound.volume = volume;
+                this.volume = (((chickenVolume / 100 / this.enemieRange)) * (masterVolume));
+                this.chicken_sound.volume = Math.min(this.volume, this.maxVolume);
+                console.log(this.chicken_sound.volume);
                 this.chicken_sound.play();
                 this.playAnimation(this.IMAGES_WALK);
             }
@@ -47,17 +50,20 @@ class Chicken extends MovableObject {
         }, 1000 / 60);
     }
 
-    range(characterX){
-        this.enemieRange = characterX-this.x
+    range(characterX) {
+        this.enemieRange = characterX - this.x + 1;
         if (this.enemieRange < 0) {
             this.enemieRange = this.enemieRange * -1;
         }
-        console.log(this.enemieRange/1000);
+    }
+
+    muteSound(){
+        this.chicken_sound.pause();
     }
 
     kill() {
         this.energy = 0;
-        this.chicken_sound.pause();
+        this.muteSound();
         this.loadImage(this.IMAGE_DEAD);
         this.y_Rect = -100;
         setTimeout(() => {

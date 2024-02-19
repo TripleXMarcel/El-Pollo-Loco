@@ -76,54 +76,57 @@
                 <button onclick="openSettings('controls')">Controls</button>
                 <button onclick="openMenu('mainMenu')">Main Menu</button>
             </div>
-            <div id="video" class="displayNone">
-                <button onclick="setAutoScale()">Auto scale</button>
-                <button onclick="scale(0.5)">360*240 scale 0.5</button>
-                <button onclick="scale(1)">720*480 scale 1</button>
-                <button onclick="scale(1.5)">1080*720 scale 1.5</button>
-                <button onclick="scale(2)">1440*950 scale 2</button>
-            </div>
-            <div id="audio" class="displayNone">
-                <div>
-                    <p>Master Volume</p>
+            <div class="optionsContainer">
+                <div id="video" class="displayNone">
+                    <button id="scale" onclick="setAutoScale()">Auto scale</button>
+                    <button id="scale0.5" onclick="scale(0.5)">360*240</button>
+                    <button id="scale1" onclick="scale(1)">720*480</button>
+                    <button id="scale1.5" onclick="scale(1.5)">1080*720</button>
+                    <button id="scale2" onclick="scale(2)">1440*950</button>
+                </div>
+                <div id="audio" class="displayNone">
                     <div>
-                        <input type="range" min="0" max="100" value="50" id="masterVolumeSlider">
-                        <p id="masterVolumeValue">50%</p>
+                        <h1>Master Volume</h1>
+                        <div>
+                            <input type="range" min="0" max="100" value="50" class="slider" id="masterVolumeSlider">
+                            <p id="masterVolumeValue">50%</p>
+                        </div>
+                    </div>
+                    <div>
+                        <h1>Chicken Volume</h1>
+                        <div>
+                            <input type="range" min="0" max="100" value="50" class="slider" id="chickenVolumeSlider">
+                            <p id="chickenVolumeValue">50%</p>
+                        </div>
+                    </div>
+                    <div>
+                        <h1>Player Volume</h1>
+                        <div>
+                            <input type="range" min="0" max="100" value="50" class="slider" id="playerVolumeSlider">
+                            <p id="playerVolumeValue">50%</p>
+                        </div>
                     </div>
                 </div>
-                <div>
-                    <p>Chicken Volume</p>
+                <div id="controls" class="displayNone">
                     <div>
-                        <input type="range" min="0" max="100" value="50" class="slider" id="chickenVolumeSlider">
-                        <p id="chickenVolumeValue">50%</p>
+                        <p>Walk left</p>
+                        <input id="walkLeft" onkeyup="setControls('walkLeft')" type="text" maxlength="1">
                     </div>
-                </div>
-                <div>
-                    <p>Player Volume</p>
                     <div>
-                        <input type="range" min="0" max="100" value="50" class="slider" id="playerVolumeSlider">
-                        <p id="playerVolumeValue">50%</p>
+                        <p>Walk right</p>
+                        <input id="walkRight" onkeyup="setControls('walkRight')" type="text" maxlength="1">
+                    </div>
+                    <div>
+                        <p>Jump</p>
+                        <input id="jump" onkeyup="setControls('jump')" type="text" maxlength="1">
+                    </div>
+                    <div>
+                        <p>Throw bottle</p>
+                        <input id="throwBottle" onkeyup="setControls('throwBottle')" type="text" maxlength="1">
                     </div>
                 </div>
             </div>
-            <div id="controls" class="displayNone">
-                <div>
-                    <p>Walk left</p>
-                    <input id="walkLeft" onkeyup="setControls('walkLeft')" type="text" maxlength="1">
-                </div>
-                <div>
-                    <p>Walk right</p>
-                    <input id="walkRight" onkeyup="setControls('walkRight')" type="text" maxlength="1">
-                </div>
-                <div>
-                    <p>Jump</p>
-                    <input id="jump" onkeyup="setControls('jump')" type="text" maxlength="1">
-                </div>
-                <div>
-                    <p>Throw bottle</p>
-                    <input id="throwBottle" onkeyup="setControls('throwBottle')" type="text" maxlength="1">
-                </div>
-            </div>
+
         </div>
 
 

@@ -12,12 +12,7 @@ window.onresize = function () {
 
 function scale(scale) {
     if (autoScale == true && scale == undefined) {
-        try {
-            adjustScaling('canvas');
-            adjustScaling('menu');
-        } catch (error) {
-
-        }
+        tryAdjustScaling()
     }
     else {
         autoScale = false;
@@ -26,9 +21,21 @@ function scale(scale) {
         }
         if (setScale('canvas', scale) == false) {
             alert('The resolution is not available, your window is too small.')
+        } else {
+            setScale('menu', scale);
+            currentResolution(scale);
         }
-        setScale('menu', scale);
+
     }
+
+}
+
+function tryAdjustScaling() {
+    try {
+        adjustScaling('canvas');
+        adjustScaling('menu');
+        currentResolution();
+    } catch (error) { }
 }
 
 function setAutoScale() {
@@ -65,6 +72,20 @@ function setScale(content, scale) {
     let transformStringX = 'scale(' + scale + ')';
     if (sidebarHeigth * scale < windowHeigth && sidebarWidth * scale < windowWidth) { container.style.transform = transformStringX; }
     else { return false };
+}
+
+function currentResolution(scale) {
+    document.getElementById('scale').classList.remove('active');
+    document.getElementById('scale0.5').classList.remove('active');
+    document.getElementById('scale1').classList.remove('active');
+    document.getElementById('scale1.5').classList.remove('active');
+    document.getElementById('scale2').classList.remove('active');
+    if (scale == undefined) {
+        document.getElementById(`scale`).classList.add('active');
+    } else {
+        document.getElementById(`scale${scale}`).classList.add('active');
+    }
+
 }
 
 function loadControls() {
@@ -151,7 +172,7 @@ document.addEventListener("DOMContentLoaded", function () {
     masterValue.innerHTML = sliderHTML(masterSlider.value);
     chickenValue.innerHTML = sliderHTML(chickenSlider.value);
     playerValue.innerHTML = sliderHTML(playerSlider.value);
-    
+
     masterSlider.oninput = function () {
         masterVolume = masterSlider.value;
         masterValue.innerHTML = sliderHTML(masterSlider.value);

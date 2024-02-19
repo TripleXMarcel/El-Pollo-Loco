@@ -20,3 +20,21 @@ canvas {
 .displayNone {
     display: none !important;
 }
+
+#ingameOverlay {
+    position: fixed;
+    right: 20px;
+    top: 10px;
+}
+
+#ingameOverlay img{
+    height: 40px;
+    width: 40px;
+    margin-left: 10px;
+    cursor: pointer;
+    border-radius: 6px;
+}
+
+#ingameOverlay img:hover{
+    background-color: rgba(0, 0, 0, 0.418);
+}

@@ -42,16 +42,25 @@
     <canvas id="canvas" width="720" height="480"></canvas>
 
     <div id="menu">
+        <div id="ingameOverlay">
+            <img src="img/buttons/button_fullscreen.png" alt="" srcset="">
+            <img src="img\buttons\button_musicoff.png" alt="" srcset="">
+            <img src="img\buttons\button_musicon.png" alt="" srcset="">
+            <img src="img/buttons/button_setting2.png" alt="" srcset="">
+            <img src="img/buttons/button_pause2.png" alt="" srcset="">
+            <img src="img\buttons\button_play.png" alt="" srcset="">
+            <img src="img\buttons\button_menu.png" alt="" srcset="">
+        </div>
         <div id="levelMenu" class="displayNone">
             <div class="levelSelection">
-                <button onclick="levelSelection('down')">Vorheriges Level</button>
+                <button onclick="levelSelection('down')">Previous</button>
                 <div>
-                    <p>Level 1</p>
+                    <p id="selectedLevel">Level 1</p>
                 </div>
-                <button onclick="levelSelection('up')">Nächstes Level</button>
+                <button onclick="levelSelection('up')">Next</button>
             </div>
             <button class="startBTN" onclick="startGame()">Start Game</button>
-            <button onclick="openMenu('mainMenu')">Main Menu</button>
+            <button class="backToMenu" onclick="openMenu('mainMenu')">Main Menu</button>
 
         </div>
         <div id="mainMenu" class="displayNone">

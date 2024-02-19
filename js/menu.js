@@ -25,9 +25,7 @@ function scale(scale) {
             setScale('menu', scale);
             currentResolution(scale);
         }
-
     }
-
 }
 
 function tryAdjustScaling() {
@@ -116,11 +114,11 @@ function loadControlsHTML() {
 function levelSelection(x) {
     if (x == 'up' && level < 2) {
         level++;
-        console.log(level);
+        document.getElementById('selectedLevel').innerHTML = `Level ${level}`;
     }
     else if (x == 'down' && level > 1) {
         level--;
-        console.log(level);
+        document.getElementById('selectedLevel').innerHTML = `Level ${level}`;
     }
 }
 
@@ -186,8 +184,6 @@ document.addEventListener("DOMContentLoaded", function () {
         playerValue.innerHTML = sliderHTML(playerSlider.value);
     }
 });
-
-
 
 function sliderHTML(value) {
     return `

@@ -20,6 +20,7 @@ function init() {
     canvas = document.getElementById('canvas');
     startScreen = new StartScreen(canvas);
     loadControls();
+    document.getElementById('selectedLevel').innerHTML = `Level ${level}`;
     scale();
     setTimeout(() => {
         loadMenu();

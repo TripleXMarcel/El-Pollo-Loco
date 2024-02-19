@@ -106,24 +106,61 @@ input {
 
 .levelSelection {
     display: flex;
+    align-items: center;
 }
 
 .levelSelection p {
     width: 150px;
     text-align: center;
+    font-size: 27px;
+    font-weight: 400;
 }
 
 .levelSelection button {
-    font-family: 'Single Day';
+    width: 120px;
+    padding-left: 10px;
+    padding-right: 10px;
     cursor: pointer;
+    font-family: 'Single Day';
+    font-size: 27px;
+    font-weight: 400;
+    border-radius: 12px;
+    border: 0;
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+.levelSelection button:hover {
+    background-color: rgba(255, 255, 255, 0.75);
 }
 
 .startBTN {
+    font-family: 'Single Day';
     cursor: pointer;
-    margin-top: 100px;
+    margin-top: 50px;
     font-size: 48px;
     font-weight: bold;
     border-radius: 12px;
+    border: 0;
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+.startBTN:hover {
+    background-color: rgba(255, 255, 255, 0.75);
+}
+
+.backToMenu {
+    font-family: 'Single Day';
+    cursor: pointer;
+    margin-top: 20px;
+    font-size: 32px;
+    font-weight: bold;
+    border-radius: 12px;
+    border: 0;
+    background-color: rgba(255, 255, 255, 0.5);
+}
+
+.backToMenu:hover {
+    background-color: rgba(255, 255, 255, 0.75);
 }
 
 .optionsContainer {

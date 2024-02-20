@@ -1,5 +1,5 @@
 function startGame() {
-    openMenu();
+    openMenu('ingameOverlay');
     level1 = loadLevel();
     world = new World(canvas, keyboard);
 }
@@ -126,6 +126,7 @@ function openMenu(menu) {
     document.getElementById('mainMenu').classList.add('displayNone');
     document.getElementById('levelMenu').classList.add('displayNone');
     document.getElementById('optionsMenu').classList.add('displayNone');
+    document.getElementById('ingameOverlay').classList.add('displayNone');
     if (menu == undefined) {
         return;
     }

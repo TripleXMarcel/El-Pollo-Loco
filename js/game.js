@@ -13,6 +13,8 @@ let autoScale = false;
 let masterVolume = 50;
 let chickenVolume = 50;
 let playerVolume = 50;
+let sound = true;
+let gamePause = false;
 
 
 

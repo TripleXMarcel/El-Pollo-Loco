@@ -8,11 +8,14 @@ class Chicken extends MovableObject {
     width_Rect = 40;
     speed = 0.4;
     energy = 1;
-    maxVolume=0.04;
-    volume=0;
+    maxVolume = 0.04;
+    volume = 0;
     interval;
     interval2;
     enemieRange;
+    intervalspeed1 = 100;
+    intervalspeed2 = 1000 / 60;
+    intervalspeed3 = 1000;
     IMAGES_WALK = [
         'img/3_enemies_chicken/chicken_normal/1_walk/1_w.png',
         'img/3_enemies_chicken/chicken_normal/1_walk/2_w.png',
@@ -28,26 +31,43 @@ class Chicken extends MovableObject {
         this.x_Rect = this.x;
     }
 
+    chickenVolume() {
+        if (sound === true) {
+            this.volume = (((chickenVolume / 100 / this.enemieRange)) * (masterVolume));
+            this.chicken_sound.volume = Math.min(this.volume, this.maxVolume);
+        } else {
+            this.chicken_sound.volume = 0;
+        }
+    }
 
 
     animate() {
         this.interval = setInterval(() => {
-            if (this.energy === 1) {
-                this.volume = (((chickenVolume / 100 / this.enemieRange)) * (masterVolume));
-                this.chicken_sound.volume = Math.min(this.volume, this.maxVolume);
-                console.log(this.chicken_sound.volume);
-                this.chicken_sound.play();
+            if (this.energy === 1 && gamePause === false) {
                 this.playAnimation(this.IMAGES_WALK);
             }
-
-        }, 100);
+        }, this.intervalspeed1);
         this.speed = this.speed + Math.random() * 0.8;
         this.interval2 = setInterval(() => {
-            if (this.energy === 1) {
+            if (this.energy === 1 && gamePause === false) {
                 this.moveLeft();
                 this.otherDirection = false;
             }
-        }, 1000 / 60);
+        }, this.intervalspeed2);
+        this.interval3 = setInterval(() => {
+            if (this.energy === 1 && gamePause === false) {
+                if (this.enemieRange < 1000) {
+                    this.chickenVolume();
+                    this.chicken_sound.play();
+                }
+            }
+        }, this.intervalspeed3);
+        this.interval4 = setInterval(() => {
+            if (this.energy === 1 && gamePause === true) {
+                this.chickenVolume();
+                this.chicken_sound.pause();
+            }
+        }, this.intervalspeed4);
     }
 
     range(characterX) {
@@ -57,7 +77,7 @@ class Chicken extends MovableObject {
         }
     }
 
-    muteSound(){
+    muteSound() {
         this.chicken_sound.pause();
     }
 

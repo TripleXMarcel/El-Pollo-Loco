@@ -34,22 +34,26 @@
     <script src="classes/startScreen.class.js"></script>
     <script src="levels/level1.js"></script>
     <script src="levels/level2.js"></script>
-    <script src="js\game.js"></script>
-    <script src="js\menu.js"></script>
+    <script src="js/game.js"></script>
+    <script src="js/menu.js"></script>
+    <script src="js/ingameOverlay.js"></script>
 </head>
 
 <body onload="init()">
     <canvas id="canvas" width="720" height="480"></canvas>
 
     <div id="menu">
-        <div id="ingameOverlay">
-            <img src="img/buttons/button_fullscreen.png" alt="" srcset="">
-            <img src="img\buttons\button_musicoff.png" alt="" srcset="">
-            <img src="img\buttons\button_musicon.png" alt="" srcset="">
-            <img src="img/buttons/button_setting2.png" alt="" srcset="">
-            <img src="img/buttons/button_pause2.png" alt="" srcset="">
-            <img src="img\buttons\button_play.png" alt="" srcset="">
-            <img src="img\buttons\button_menu.png" alt="" srcset="">
+        <div id="ingameOverlay" class="displayNone">
+            <div id="menuIngame" class="displayNone">
+                <img id="fullScreenBTN" onclick="fullScreen()" src="img/buttons/button_fullscreen.png" alt="" srcset="">
+                <img id="muteBTN" onclick="muteGame()" src="img\buttons\button_musicon.png" alt="" srcset="">
+                <img id="unmuteBTN" class="displayNone" onclick="unmuteGame()" src="img\buttons\button_musicoff.png" alt="" srcset="">
+                <img id="openSettingsBTN" onclick="openSettingsIngame()" src="img/buttons/button_setting2.png" alt="" srcset="">
+                <img id="pauseBTN" onclick="pause()" src="img/buttons/button_pause2.png" alt="" srcset="">
+                <img id="unpauseBTN" class="displayNone" onclick="unpause()" src="img\buttons\button_play.png" alt="" srcset="">
+                <img id="closeGameBTN" onclick="closeGame()" src="img/buttons/button_close.png" alt="" srcset="">
+            </div>
+            <img onclick="openIngameMenu()" src="img\buttons\button_menu.png" alt="" srcset="">
         </div>
         <div id="levelMenu" class="displayNone">
             <div class="levelSelection">
@@ -83,7 +87,7 @@
                 <button onclick="openSettings('video')">Video</button>
                 <button onclick="openSettings('audio')">Audio</button>
                 <button onclick="openSettings('controls')">Controls</button>
-                <button onclick="openMenu('mainMenu')">Main Menu</button>
+                <button id="mainMenuBTN" onclick="openMenu('mainMenu')">Main Menu</button>
             </div>
             <div class="optionsContainer">
                 <div id="video" class="displayNone">

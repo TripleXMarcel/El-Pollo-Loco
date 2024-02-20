@@ -88,15 +88,15 @@ class Character extends MovableObject {
 
     applyGravity() {
         setInterval(() => {
-            if (this.isAboveGrove() || this.speedY > 0) {
+            if ((this.isAboveGrove() || this.speedY > 0) && gamePause === false) {
                 this.y -= this.speedY;
                 this.y_Rect -= this.speedY;
                 this.speedY -= this.acceleration;
             }
-            if (this.speedY <= 0 && this.isAboveGrove()) {
+            if (this.speedY <= 0 && this.isAboveGrove() && gamePause === false) {
                 this.onCollisionCourse = true;
             }
-            if (!this.isAboveGrove()) {
+            if (!this.isAboveGrove() && gamePause === false) {
                 this.y = 200;
                 this.y_Rect = 290;
                 this.onCollisionCourse = false;
@@ -108,21 +108,28 @@ class Character extends MovableObject {
         return this.y < 200;
     }
 
+    volume() {
+        if (sound === true) {
+            this.walking_sound.volume = ((playerVolume / 100) * masterVolume) / 100;
+        } else {
+            this.walking_sound.volume = 0;
+        }
+    }
+
     animate() {
 
         this.interval = setInterval(() => {
-
-            this.walking_sound.volume = ((playerVolume / 100) * masterVolume) / 100;
-            if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
+            this.volume();
+            if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x && gamePause === false) {
                 this.moveRight();
                 this.walking_sound.play();
             }
-            else if (this.world.keyboard.LEFT && this.x > 0) {
+            else if (this.world.keyboard.LEFT && this.x > 0 && gamePause === false) {
                 this.moveLeft();
                 this.walking_sound.play();
             }
             else { this.walking_sound.pause(); }
-            if (this.world.keyboard.SPACE && !this.isAboveGrove()) {
+            if (this.world.keyboard.SPACE && !this.isAboveGrove() && gamePause === false) {
                 this.speedY = 25;
             }
 
@@ -131,19 +138,19 @@ class Character extends MovableObject {
 
         }, 1000 / 60);
         this.interval2 = setInterval(() => {
-            if (this.isDead()) {
+            if (this.isDead() && gamePause === false) {
                 this.playAnimation(this.IMAGES_DEAD);
                 this.world.characterDead();
-            } else if (this.isHurt()) {
+            } else if (this.isHurt() && gamePause === false) {
                 this.playAnimation(this.IMAGES_HURT);
-            } else if (this.isAboveGrove() && this.speedY > 0) {
+            } else if (this.isAboveGrove() && this.speedY > 0 && gamePause === false) {
                 this.playAnimation(this.IMAGES_JUMPING_UP);
-            } else if (this.isAboveGrove() && this.speedY < 0) {
+            } else if (this.isAboveGrove() && this.speedY < 0 && gamePause === false) {
                 this.playAnimation(this.IMAGES_JUMPING_DOWN);
             }
-            else if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x || this.world.keyboard.LEFT && this.x > 0) {
+            else if ((this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x || this.world.keyboard.LEFT && this.x > 0) && gamePause === false) {
                 this.playAnimation(this.IMAGES_WALKING);
-            } else {
+            } else if(gamePause === false) {
                 this.playAnimation(this.IMAGES_IDLE);
             }
         }

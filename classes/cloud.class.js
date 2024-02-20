@@ -13,14 +13,17 @@ class Cloud extends MovableObject {
     animate() {
         this.speed = this.speed + Math.random() * 0.2;
         this.interval = setInterval(() => {
-            if (this.x > -1000) {
-                this.moveLeft();
-                this.otherDirection = false;
-            }
-            else{
-                this.x = (719 * 20) + Math.random() * 500;
+            if (gamePause === false) {
+                if (this.x > -1000) {
+                    this.moveLeft();
+                    this.otherDirection = false;
+                }
+                else {
+                    this.x = (719 * 20) + Math.random() * 500;
+                }
             }
 
-        }, 1000/60);
+
+        }, 1000 / 60);
     }
 }

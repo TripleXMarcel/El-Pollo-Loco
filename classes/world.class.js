@@ -124,7 +124,6 @@ class World {
             this.collidingEnemy();
             this.collidingCollectable();
             this.soundEnemie();
-
         }, 1000 / 60)
 
     }

@@ -5,28 +5,26 @@ function startGame() {
 }
 
 window.onresize = function () {
-    if (autoScale == true) {
-        scale();
-    }
+    scale();
 };
 
 function scale(scale) {
-    if (autoScale == true && scale == undefined) {
-        tryAdjustScaling()
-    }
-    else {
-        autoScale = false;
-        if (scale == undefined) {
-            scale = 1;
+        if (autoScale == true && scale == undefined) {
+            tryAdjustScaling()
         }
-        if (setScale('canvas', scale) == false) {
-            alert('The resolution is not available, your window is too small.')
-        } else {
-            setScale('menu', scale);
-            currentResolution(scale);
+        else {
+            autoScale = false;
+            if (scale == undefined) {
+                scale = 1;
+            }
+            if (setScale('canvas', scale) == false) {
+                autoScale = true;
+            } else {
+                setScale('menu', scale);
+                currentResolution(scale);
+            }
         }
     }
-}
 
 function tryAdjustScaling() {
     try {

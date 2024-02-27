@@ -42,18 +42,40 @@
 <body onload="init()">
     <canvas id="canvas" width="720" height="480"></canvas>
 
+
+
     <div id="menu">
-        <div id="ingameOverlay" class="displayNone">
-            <div id="menuIngame" class="displayNone">
-                <img id="fullScreenBTN" onclick="fullScreen()" src="img/buttons/button_fullscreen.png" alt="" srcset="">
-                <img id="muteBTN" onclick="muteGame()" src="img\buttons\button_musicon.png" alt="" srcset="">
-                <img id="unmuteBTN" class="displayNone" onclick="unmuteGame()" src="img\buttons\button_musicoff.png" alt="" srcset="">
-                <img id="openSettingsBTN" onclick="openSettingsIngame()" src="img/buttons/button_setting2.png" alt="" srcset="">
-                <img id="pauseBTN" onclick="pause()" src="img/buttons/button_pause2.png" alt="" srcset="">
-                <img id="unpauseBTN" class="displayNone" onclick="unpause()" src="img\buttons\button_play.png" alt="" srcset="">
-                <img id="closeGameBTN" onclick="closeGame()" src="img/buttons/button_close.png" alt="" srcset="">
+        <div id="ingameContainer" class="displayNone">
+            <div id="ingameOverlay">
+                <div id="menuIngame" class="displayNone">
+                    <img id="fullScreenBTN" onclick="fullScreen()" src="img/buttons/button_fullscreen.png" alt=""
+                        srcset="">
+                    <img id="muteBTN" onclick="muteGame()" src="img\buttons\button_musicon.png" alt="" srcset="">
+                    <img id="unmuteBTN" class="displayNone" onclick="unmuteGame()" src="img\buttons\button_musicoff.png"
+                        alt="" srcset="">
+                    <img id="openSettingsBTN" onclick="openSettingsIngame()" src="img/buttons/button_setting2.png"
+                        alt="" srcset="">
+                    <img id="pauseBTN" onclick="pause()" src="img/buttons/button_pause2.png" alt="" srcset="">
+                    <img id="unpauseBTN" class="displayNone" onclick="unpause()" src="img\buttons\button_play.png"
+                        alt="" srcset="">
+                    <img id="closeGameBTN" onclick="closeGame()" src="img/buttons/button_close.png" alt="" srcset="">
+                </div>
+                <img onclick="openIngameMenu()" src="img\buttons\button_menu.png" alt="" srcset="">
             </div>
-            <img onclick="openIngameMenu()" src="img\buttons\button_menu.png" alt="" srcset="">
+            <div id="gameButtons" class="displayNone">
+                <div id="gameButtonsLeftRight">
+                    <img src="img/buttons/button_left.png" onpointerover="mobileKeyLeft(true)"
+                        onpointerleave="mobileKeyLeft(false)" srcset="">
+                    <img src="img/buttons/button_right.png" onpointerover="mobileKeyRight(true)"
+                        onpointerleave="mobileKeyRight(false)" alt="" srcset="">
+                </div>
+                <div id="actionButtons">
+                    <img src="img/buttons/button_up.png" onpointerover="mobileKeyJump(true)"
+                        onpointerleave="mobileKeyJump(false)" alt="" srcset="">
+                    <img src="img/buttons/button_attack2.png" onpointerover="mobileKeyAttack(true)"
+                        onpointerleave="mobileKeyAttack(false)" alt="" srcset="">
+                </div>
+            </div>
         </div>
         <div id="levelMenu" class="displayNone">
             <div class="levelSelection">
@@ -88,6 +110,7 @@
                 <button onclick="openSettings('audio')">Audio</button>
                 <button onclick="openSettings('controls')">Controls</button>
                 <button id="mainMenuBTN" onclick="openMenu('mainMenu')">Main Menu</button>
+                <button id="backToGameBTN" class="displayNone" onclick="openSettingsIngame()">Back to Game</button>
             </div>
             <div class="optionsContainer">
                 <div id="video" class="displayNone">
@@ -142,7 +165,9 @@
 
         </div>
 
-
+    </div>
+    <div id="screenInformation" class="displayNone">
+        <p>Drehe dein Device</p>
     </div>
 
 </body>

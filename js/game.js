@@ -107,3 +107,19 @@ document.addEventListener('keyup', (e) => {
     };
 
 });
+
+function mobileKeyLeft(bool){
+    keyboard.LEFT = bool;
+}
+
+function mobileKeyRight(bool){
+    keyboard.RIGHT = bool;
+}
+
+function mobileKeyJump(bool){
+    keyboard.SPACE = bool;
+}
+
+function mobileKeyAttack(bool){
+    keyboard.ENTER = bool;
+}

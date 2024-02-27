@@ -13,10 +13,6 @@ input {
     position: fixed;
 }
 
-#ingameOverlay{
-    display: flex;
-}
-
 #mainMenu {
     display: flex;
     justify-content: space-between;

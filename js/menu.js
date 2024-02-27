@@ -1,5 +1,5 @@
 function startGame() {
-    openMenu('ingameOverlay');
+    openMenu('ingameContainer');
     level1 = loadLevel();
     world = new World(canvas, keyboard);
 }
@@ -9,22 +9,54 @@ window.onresize = function () {
 };
 
 function scale(scale) {
+    if (isMobile()) {
+        loadMobile();
+    } else {
+        unloadMobile();
         if (autoScale == true && scale == undefined) {
-            tryAdjustScaling()
+            tryAdjustScaling();
         }
         else {
-            autoScale = false;
-            if (scale == undefined) {
-                scale = 1;
-            }
-            if (setScale('canvas', scale) == false) {
-                autoScale = true;
-            } else {
-                setScale('menu', scale);
-                currentResolution(scale);
-            }
+            manualScale(scale);
         }
     }
+
+}
+
+function isMobile() {
+    return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+}
+
+function loadMobile() {
+    document.getElementById('gameButtons').classList.remove('displayNone');
+    document.getElementById('screenInformation').classList.remove('displayNone');
+    focusQuerformatHandy();
+}
+
+function unloadMobile() {
+    document.getElementById('gameButtons').classList.add('displayNone');
+    document.getElementById('screenInformation').classList.add('displayNone');
+}
+
+function focusQuerformatHandy() {
+    var istQuerformat = window.matchMedia("(orientation: landscape)").matches;
+    if (istQuerformat) {
+        document.getElementById('screenInformation').classList.add('displayNone');
+    }
+}
+
+function manualScale(scale) {
+    autoScale = false;
+    if (scale == undefined) {
+        scale = 1;
+    }
+    if (setScale('canvas', scale) == false) {
+        autoScale = true;
+    } else {
+        setScale('menu', scale);
+        currentResolution(scale);
+    }
+}
 
 function tryAdjustScaling() {
     try {
@@ -124,7 +156,7 @@ function openMenu(menu) {
     document.getElementById('mainMenu').classList.add('displayNone');
     document.getElementById('levelMenu').classList.add('displayNone');
     document.getElementById('optionsMenu').classList.add('displayNone');
-    document.getElementById('ingameOverlay').classList.add('displayNone');
+    document.getElementById('ingameContainer').classList.add('displayNone');
     if (menu == undefined) {
         return;
     }

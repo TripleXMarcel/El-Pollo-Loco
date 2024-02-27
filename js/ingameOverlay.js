@@ -19,12 +19,14 @@ function openSettingsIngame() {
         openMenu('optionsMenu');
         pause();
         document.getElementById('mainMenuBTN').classList.add('displayNone');
+        document.getElementById('backToGameBTN').classList.remove('displayNone');
         settingsIngame = true;
     } else {
         unpause();
+        openMenu('ingameContainer');
         document.getElementById('mainMenuBTN').classList.remove('displayNone');
-        document.getElementById('optionsMenu').classList.add('displayNone');
         settingsIngame = false;
+        document.getElementById('backToGameBTN').classList.add('displayNone');
     }
 
 }

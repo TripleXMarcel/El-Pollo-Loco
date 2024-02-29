@@ -10,7 +10,6 @@ class Character extends MovableObject {
     speed = 10;
     speedY = 0;
     onCollisionCourse = false;
-    acceleration = 2.5;
     interval;
     interval2;
     IMAGES_WALKING = [
@@ -84,28 +83,6 @@ class Character extends MovableObject {
         this.loadImages(this.IMAGES_HURT);
         this.loadImages(this.IMAGES_IDLE);
         this.applyGravity();
-    }
-
-    applyGravity() {
-        setInterval(() => {
-            if ((this.isAboveGrove() || this.speedY > 0) && gamePause === false) {
-                this.y -= this.speedY;
-                this.y_Rect -= this.speedY;
-                this.speedY -= this.acceleration;
-            }
-            if (this.speedY <= 0 && this.isAboveGrove() && gamePause === false) {
-                this.onCollisionCourse = true;
-            }
-            if (!this.isAboveGrove() && gamePause === false) {
-                this.y = 200;
-                this.y_Rect = 290;
-                this.onCollisionCourse = false;
-            }
-        }, 1000 / 50);
-    }
-
-    isAboveGrove() {
-        return this.y < 200;
     }
 
     volume() {

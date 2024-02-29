@@ -7,10 +7,36 @@ class MovableObject extends DrawableObject {
     coin = 0;
     salsa = 0;
     lastHit = 0;
-    dead=false;
+    dead = false;
+    acceleration= 2.5;
 
 
+    applyGravity() {
+        setInterval(() => {
+            if ((this.isAboveGrove() || this.speedY > 0) && gamePause === false) {
+                this.y -= this.speedY;
+                this.y_Rect -= this.speedY;
+                this.speedY -= this.acceleration;
+            }
+            if (this.speedY <= 0 && this.isAboveGrove() && gamePause === false) {
+                this.onCollisionCourse = true;
+            }
+            if (!this.isAboveGrove() && gamePause === false) {
+                this.y = 200;
+                this.y_Rect = 290;
+                this.onCollisionCourse = false;
+            }
+        }, 1000 / 60);
+    }
 
+    isAboveGrove() {
+        if (this instanceof ThrowBottle === true) {
+            return true;
+        } else {
+            return this.y < 200;
+        }
+
+    }
 
     moveRight() {
         this.x += this.speed;

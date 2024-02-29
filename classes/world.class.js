@@ -15,6 +15,8 @@ class World {
     healthBar = new HealthBar();
     coinBar = new CoinBar();
     salsaBar = new SalsaBar();
+    gameOverScreen = new GameOverScreen();
+    throwableObjects = [];
     levels = [level1, level2];
     camera_x = 0;
     intervalIds;
@@ -78,7 +80,22 @@ class World {
         setTimeout(() => {
             this.pause();
             this.dead = true;
+            this.gameOver();
         }, 500);
+        setTimeout(() => {
+            closeGame();
+        }, 5000);
+    }
+
+    gameOver() {
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        this.addObjectsToMap(this.level.backgroundObjects);
+        this.addToMap(this.gameOverScreen);
+        let self = this;
+        requestAnimationFrame(function () {
+            self.gameOver();
+        });
+        
     }
 
     closeGame() {
@@ -97,6 +114,7 @@ class World {
         this.addObjectsToMap(this.level.clouds);
         this.addObjectsToMap(this.level.coins);
         this.addObjectsToMap(this.level.bottle);
+        this.addObjectsToMap(this.throwableObjects);
         this.ctx.translate(-this.camera_x, 0);
         this.addObjectsToMap(this.statusbar.emptyStatusBar);
         this.addToMap(this.healthBar);
@@ -124,19 +142,28 @@ class World {
             this.collidingEnemy();
             this.collidingCollectable();
             this.soundEnemie();
+            this.throw();
         }, 1000 / 60)
 
     }
 
+    throw(){
+        if (this.keyboard.THROW) {
+            let bottle = new ThrowBottle(this.character.x, this.character.y);
+            this.throwableObjects.push(bottle);
+            this.keyboard.THROW=false;
+        }
+    }
+
     soundEnemie() {
         for (let i = 0; i < this.level.enemies.length; i++) {
-                this.level.enemies[i].range(this.character.x)
+            this.level.enemies[i].range(this.character.x)
         }
     }
 
     muteEnemie() {
         for (let i = 0; i < this.level.enemies.length; i++) {
-                this.level.enemies[i].muteSound()
+            this.level.enemies[i].muteSound()
         }
     }
 

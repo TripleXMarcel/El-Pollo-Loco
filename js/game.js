@@ -75,7 +75,7 @@ document.addEventListener('keydown', (e) => {
         keyboard.SPACE = true;
     };
     if (e.key == throwBottle) {
-        keyboard.ENTER = true;
+        keyboard.THROW = true;
     };
     if (e.key == 'Esc') {
         if (keyboard.ESC === true) {
@@ -103,7 +103,7 @@ document.addEventListener('keyup', (e) => {
         keyboard.SPACE = false;
     };
     if (e.key == throwBottle) {
-        keyboard.ENTER = false;
+        keyboard.THROW = false;
     };
 
 });

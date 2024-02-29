@@ -95,7 +95,7 @@ class World {
         requestAnimationFrame(function () {
             self.gameOver();
         });
-        
+
     }
 
     closeGame() {
@@ -143,15 +143,18 @@ class World {
             this.collidingCollectable();
             this.soundEnemie();
             this.throw();
+            this.collidingThrowableObject();
         }, 1000 / 60)
 
     }
 
-    throw(){
+    throw() {
         if (this.keyboard.THROW) {
             let bottle = new ThrowBottle(this.character.x, this.character.y);
             this.throwableObjects.push(bottle);
-            this.keyboard.THROW=false;
+            this.keyboard.THROW = false;
+            this.character.salsa -= 0.5;
+            this.salsaBar.loadSalsa(this.character.salsa, this.level.bottle.length);
         }
     }
 
@@ -170,13 +173,25 @@ class World {
     collidingEnemy() {
         this.level.enemies.forEach((enemy, i) => {
             if (this.character.isCollidingTop(enemy)) {
-                enemy.kill(i, this.level);
+                enemy.kill();
                 this.character.speedY = 25;
             } else
                 if (this.character.isColliding(enemy)) {
                     this.character.hit();
                     this.healthBar.loadEnergy(this.character.energy);
                 }
+        });
+    }
+
+    collidingThrowableObject() {
+        this.level.enemies.forEach(enemy => {
+            for (let j = 0; j < this.throwableObjects.length; j++) {
+                const element = this.throwableObjects[j];
+                if (element.isCollidingTop(enemy)) {
+                    enemy.enemieHit();
+                }
+            }
+
         });
     }
 
@@ -205,7 +220,7 @@ class World {
         if (mo.otherDirection) {
             this.flipImage(mo);
         }
-        //mo.drawFrame(this.ctx);
+        mo.drawFrame(this.ctx);
         mo.draw(this.ctx);
         if (mo.otherDirection) {
             this.flipImageBack(mo);

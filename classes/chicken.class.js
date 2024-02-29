@@ -81,6 +81,10 @@ class Chicken extends MovableObject {
         this.chicken_sound.pause();
     }
 
+    enemieHit() {
+        this.kill();
+    }
+
     kill() {
         this.energy = 0;
         this.muteSound();

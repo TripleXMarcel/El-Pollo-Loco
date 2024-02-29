@@ -8,7 +8,7 @@ class MovableObject extends DrawableObject {
     salsa = 0;
     lastHit = 0;
     dead = false;
-    acceleration= 2.5;
+    acceleration = 2.5;
 
 
     applyGravity() {
@@ -78,9 +78,6 @@ class MovableObject extends DrawableObject {
         else {
             this.lastHit = new Date().getTime();
         }
-    }
-    kill(level) {
-        level.enemies.splice(i, 1);
     }
     collectCoin(i, level) {
         level.coins.splice(i, 1);

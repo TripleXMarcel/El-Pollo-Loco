@@ -4,6 +4,10 @@ class Endboss extends MovableObject {
     width = 400;
     healthEndBoss = 100;
     interval;
+    x_Rect;
+    y_Rect = 50;
+    height_Rect = 400;
+    width_Rect = 400;
 
 
     IMAGES_ALERT = [
@@ -46,23 +50,48 @@ class Endboss extends MovableObject {
     constructor() {
         super().loadImage(this.IMAGES_ALERT[0]);
         this.loadImages(this.IMAGES_ALERT);
-
+        this.loadImages(this.IMAGES_DEAD);
 
         this.x = 8200;
+        this.x_Rect = this.x;
     }
 
     animate() {
         this.interval = setInterval(() => {
-            if (gamePause === false) {
+            if (gamePause === false && this.healthEndBoss > 0) {
                 this.playAnimation(this.IMAGES_ALERT);
+            } else if (this.healthEndBoss == 0) {
+                this.playAnimation(this.IMAGES_DEAD);
             }
 
         }, 200);
     }
+
     muteSound() {
         return;
     }
+
     range() {
         return;
+    }
+
+    enemieHit() {
+        if (this.healthEndBoss > 0) {
+            this.healthEndBoss -= 1;
+            console.log(this.healthEndBoss);
+        } else {
+            this.kill();
+        }
+
+    }
+
+    kill() {
+        this.healthEndBoss = 0;
+        this.muteSound();
+
+        this.y_Rect = -10000;
+        setTimeout(() => {
+            this.y = 9999;
+        }, 800);
     }
 }

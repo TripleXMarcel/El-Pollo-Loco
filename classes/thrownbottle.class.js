@@ -1,6 +1,5 @@
 class ThrowBottle extends MovableObject {
-
-
+    onCollisionCourse = false;
     IMAGES_THROWINGBOTTLE = [
         'img/6_salsa_bottle/bottle_rotation/1_bottle_rotation.png',
         'img/6_salsa_bottle/bottle_rotation/2_bottle_rotation.png',
@@ -24,9 +23,13 @@ class ThrowBottle extends MovableObject {
         //this.loadImages(this.IMAGES_THROWINGBOTTLE);
         this.x = x;
         this.y = y;
+        this.y_Rect = y;
+        this.x_Rect = x;
         this.height = 60;
         this.width = 50;
-        this.throw(); 
+        this.width_Rect = this.width;
+        this.height_Rect = this.height;
+        this.throw();
     }
 
     throw() {
@@ -34,6 +37,7 @@ class ThrowBottle extends MovableObject {
         this.applyGravity();
         setInterval(() => {
             this.x += 10;
+            this.x_Rect +=10;
         }, 10);
     }
 }

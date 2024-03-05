@@ -80,20 +80,26 @@ class World {
         setTimeout(() => {
             this.pause();
             this.dead = true;
-            this.gameOver();
+            this.endScreen();
         }, 500);
         setTimeout(() => {
             closeGame();
         }, 5000);
     }
 
-    gameOver() {
+    endBossDead() {
+        closeGame();
+    }
+
+    endScreen() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.addObjectsToMap(this.level.backgroundObjects);
-        this.addToMap(this.gameOverScreen);
+        if (this.dead === true) {
+            this.addToMap(this.gameOverScreen);
+        }
         let self = this;
         requestAnimationFrame(function () {
-            self.gameOver();
+            self.endScreen();
         });
 
     }

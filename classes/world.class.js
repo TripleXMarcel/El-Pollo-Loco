@@ -15,6 +15,7 @@ class World {
     healthBar = new HealthBar();
     coinBar = new CoinBar();
     salsaBar = new SalsaBar();
+    healthEndBossBar = new HealthEndBossBar();
     gameOverScreen = new GameOverScreen();
     throwableObjects = [];
     levels = [level1, level2];
@@ -110,37 +111,38 @@ class World {
     }
 
     draw() {
-        if (!this.gameOn) {
-            return;
-        }
+        if (!this.gameOn) {return;}
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.ctx.translate(this.camera_x, 0);
+        this.drawObjectElements()
+        this.ctx.translate(-this.camera_x, 0);
+        this.drawBarElements();
+        this.ctx.translate(this.camera_x, 0);
+        if (!this.dead) {
+            this.addToMap(this.character);
+        }
+        this.ctx.translate(-this.camera_x, 0);
+        let self = this;
+        requestAnimationFrame(function () {self.draw();});
+    }
+
+    drawObjectElements() {
         this.addObjectsToMap(this.level.backgroundObjects);
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.level.clouds);
         this.addObjectsToMap(this.level.coins);
         this.addObjectsToMap(this.level.bottle);
         this.addObjectsToMap(this.throwableObjects);
-        this.ctx.translate(-this.camera_x, 0);
+    }
+
+    drawBarElements() {
         this.addObjectsToMap(this.statusbar.emptyStatusBar);
         this.addToMap(this.healthBar);
         this.addToMap(this.coinBar);
         this.addToMap(this.salsaBar);
+        this.addToMap(this.healthEndBossBar);
         this.addObjectsToMap(this.statusbar.iconStatusBar);
 
-
-
-        //this.addObjectsToMap(this.statusbar.healthEndBossStatusBar);
-        this.ctx.translate(this.camera_x, 0);
-        if (!this.dead) {
-            this.addToMap(this.character);
-        }
-
-        this.ctx.translate(-this.camera_x, 0);
-        let self = this;
-        requestAnimationFrame(function () {
-            self.draw();
-        });
     }
 
     checkCollisions() {

@@ -43,31 +43,47 @@ class Chicken extends MovableObject {
 
     animate() {
         this.interval = setInterval(() => {
-            if (this.energy === 1 && gamePause === false) {
-                this.playAnimation(this.IMAGES_WALK);
-            }
+            this.chickenWalkAnimation();
         }, this.intervalspeed1);
         this.speed = this.speed + Math.random() * 0.8;
         this.interval2 = setInterval(() => {
-            if (this.energy === 1 && gamePause === false) {
-                this.moveLeft();
-                this.otherDirection = false;
-            }
+            this.chickenMove();
         }, this.intervalspeed2);
         this.interval3 = setInterval(() => {
-            if (this.energy === 1 && gamePause === false) {
-                if (this.enemieRange < 1000) {
-                    this.chickenVolume();
-                    this.chicken_sound.play();
-                }
-            }
+            this.chickenSoundVolume();
         }, this.intervalspeed3);
         this.interval4 = setInterval(() => {
-            if (this.energy === 1 && gamePause === true) {
-                this.chickenVolume();
-                this.chicken_sound.pause();
-            }
+            this.chickenSound();
         }, this.intervalspeed4);
+    }
+
+    chickenWalkAnimation() {
+        if (this.energy === 1 && gamePause === false) {
+            this.playAnimation(this.IMAGES_WALK);
+        }
+    }
+
+    chickenMove() {
+        if (this.energy === 1 && gamePause === false) {
+            this.moveLeft();
+            this.otherDirection = false;
+        }
+    }
+
+    chickenSound() {
+        if (this.energy === 1 && gamePause === true) {
+            this.chickenVolume();
+            this.chicken_sound.pause();
+        }
+    }
+
+    chickenSoundVolume() {
+        if (this.energy === 1 && gamePause === false) {
+            if (this.enemieRange < 1000) {
+                this.chickenVolume();
+                this.chicken_sound.play();
+            }
+        }
     }
 
     range(characterX) {

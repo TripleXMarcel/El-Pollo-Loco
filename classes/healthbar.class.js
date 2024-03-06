@@ -10,7 +10,6 @@ class HealthBar extends DrawableObject {
     }
 loadEnergy(energy) {
     this.percentage = energy / 100;
-    console.log(this.percentage);
-    this.width = 300*this.percentage; // Aufruf der Methode zur Breitenaktualisierung der HealthBar
+    this.width = 300*this.percentage;
 }
 }

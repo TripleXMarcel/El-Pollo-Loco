@@ -28,7 +28,6 @@ function openSettingsIngame() {
         settingsIngame = false;
         document.getElementById('backToGameBTN').classList.add('displayNone');
     }
-
 }
 
 function pause() {

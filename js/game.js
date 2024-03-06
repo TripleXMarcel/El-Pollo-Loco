@@ -15,6 +15,7 @@ let chickenVolume = 50;
 let playerVolume = 50;
 let sound = true;
 let gamePause = false;
+let endBossHealth = null;
 
 
 

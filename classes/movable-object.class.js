@@ -1,6 +1,4 @@
 class MovableObject extends DrawableObject {
-
-
     speed = 0.1;
     otherDirection = false;
     energy = 100;
@@ -79,18 +77,22 @@ class MovableObject extends DrawableObject {
             this.lastHit = new Date().getTime();
         }
     }
+
     collectCoin(i, level) {
         level.coins.splice(i, 1);
         this.coin++;
     }
+
     collectSalsa(j, level) {
         level.bottle.splice(j, 1);
         this.salsa++;
     }
+
     isHurt() {
         let timepassed = new Date().getTime() - this.lastHit;
         return timepassed < 500;
     }
+
     isDead() {
         return this.energy == 0;
     }

@@ -10,6 +10,6 @@ class SalsaBar extends Statusbar{
         }
     loadSalsa(salsa, i) {
         this.percentage = salsa / (i+salsa);
-        this.width = 300*this.percentage; // Aufruf der Methode zur Breitenaktualisierung der HealthBar
+        this.width = 300*this.percentage;
     }
 }

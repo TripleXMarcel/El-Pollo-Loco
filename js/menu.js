@@ -176,15 +176,10 @@ function openSettings(settings) {
 function setControls(x) {
     element = document.getElementById(x);
     if (element.value != walkLeft && element.value != walkRight && element.value != jump && element.value != throwBottle) {
-        if (x == 'walkLeft' && element.value != '') {
-            walkLeft = element.value;
-        } else if (x == 'walkRight' && element.value != '') {
-            walkRight = element.value;
-        } else if (x == 'jump' && element.value != '') {
-            jump = element.value;
-        } else if (x == 'throwBottle' && element.value != '') {
-            throwBottle = element.value;
-        }
+        if (x == 'walkLeft' && element.value != '') {walkLeft = element.value;} 
+            else if (x == 'walkRight' && element.value != '') {walkRight = element.value;} 
+            else if (x == 'jump' && element.value != '') {jump = element.value;} 
+            else if (x == 'throwBottle' && element.value != '') {throwBottle = element.value;}
     }
     element.placeholder = element.value;
     element.value = '';
@@ -201,7 +196,6 @@ document.addEventListener("DOMContentLoaded", function () {
     masterValue.innerHTML = sliderHTML(masterSlider.value);
     chickenValue.innerHTML = sliderHTML(chickenSlider.value);
     playerValue.innerHTML = sliderHTML(playerSlider.value);
-
     masterSlider.oninput = function () {
         masterVolume = masterSlider.value;
         masterValue.innerHTML = sliderHTML(masterSlider.value);

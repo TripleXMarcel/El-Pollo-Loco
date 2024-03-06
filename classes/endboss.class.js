@@ -1,5 +1,6 @@
 class Endboss extends MovableObject {
     y = 50;
+    x;
     height = 400;
     width = 400;
     interval;
@@ -8,6 +9,8 @@ class Endboss extends MovableObject {
     height_Rect = 400;
     width_Rect = 400;
     distance;
+    energy = 500;
+    speed = 4;
     i = 0;
     bossRange = false;
 
@@ -49,7 +52,6 @@ class Endboss extends MovableObject {
 
     constructor() {
         super().loadImage(this.IMAGES_ALERT[0]);
-        this.loadImages(this.IMAGES_ALERT);
         this.loadImages(this.IMAGES_HURT);
         this.loadImages(this.IMAGES_WALK);
         this.loadImages(this.IMAGES_ATTACK);
@@ -61,27 +63,57 @@ class Endboss extends MovableObject {
         this.interval = setInterval(() => {
             if (this.bossRange === false) {
                 this.bossInRange();
-                clearInterval(this.interval);
-            } else if (gamePause === false && this.energy > 0) {
-                this.moveLeft();
-                this.otherDirection = false;
-                //this.playAnimation(this.IMAGES_WALK);
             } else if (gamePause === false && this.isHurt() && this.energy > 0) {
-                this.playAnimation(this.IMAGES_HURT);
+                this.bossHurt();
+            } else if (gamePause === false && this.bossHitRange() == true < 10 && this.energy > 0) {
+                this.bossAttack();
+            } else if (gamePause === false && this.energy > 0) {
+                this.bossMove();
             } else if (this.energy <= 0) {
-                this.kill();
-                clearInterval(this.interval);
+                this.bossDead();
             }
-        }, 200);
+        }, 100);
+    }
+
+    bossMove() {
+        this.moveLeft();
+        this.otherDirection = false;
+        this.playAnimation(this.IMAGES_WALK);
+    }
+
+    bossAttack() {
+        this.moveLeft();
+        this.otherDirection = false;
+        this.playAnimation(this.IMAGES_ATTACK);
+    }
+
+    bossHurt() {
+        this.playAnimation(this.IMAGES_HURT);
+        endBossHealth = this.energy;
+    }
+
+    bossDead() {
+        endBossHealth = this.energy;
+        this.kill();
+        clearInterval(this.interval);
     }
 
     bossInRange() {
         this.distance = this.x - world.character.x;
-        console.log(this.distance);
         if (this.distance < 500) {
+            clearInterval(this.interval);
+            gamePause = true;
             this.alertAnimation();
-        } else {
-            this.animate();
+        }
+    }
+
+    bossHitRange() {
+        this.distance = this.x - world.character.x;
+        if (this.distance < 100) {
+            return true;
+        }
+        else {
+            return false;
         }
     }
 
@@ -103,13 +135,15 @@ class Endboss extends MovableObject {
             const element = this.IMAGES_ALERT[this.i];
             this.loadImage(element);
         }
+        world.statusbar.iconStatusBar.push(new IconStatusBar('img/7_statusbars/3_icons/icon_health_endboss.png', 65, 660, 32, 40));
         this.bossRange = true;
+        gamePause = false;
+        endBossHealth = this.energy;
         this.animate();
     }
 
     killAnimation() {
         this.loadImage('img/4_enemie_boss_chicken/5_dead/G24.png');
-
         setTimeout(() => {
             this.loadImage('img/4_enemie_boss_chicken/5_dead/G26.png')
         }, 200);

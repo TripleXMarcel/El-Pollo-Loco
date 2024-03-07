@@ -5,9 +5,9 @@ class Endboss extends MovableObject {
     width = 400;
     interval;
     x_Rect;
-    y_Rect = 50;
-    height_Rect = 380;
-    width_Rect = 380;
+    y_Rect = 120;
+    height_Rect = 340;
+    width_Rect = 340;
     distance;
     energy = 5;
     speed = 4;
@@ -61,7 +61,7 @@ class Endboss extends MovableObject {
         this.loadImages(this.IMAGES_WALK);
         this.loadImages(this.IMAGES_ATTACK);
         this.x = 8200;
-        this.x_Rect = this.x;
+        this.x_Rect = this.x + 30;
     }
 
     /**

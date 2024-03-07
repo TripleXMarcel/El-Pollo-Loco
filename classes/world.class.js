@@ -195,7 +195,7 @@ class World {
             this.soundEnemie();
             this.throw();
             this.collidingThrowableObject();
-        }, 1000 / 60)
+        }, 10)
 
     }
 

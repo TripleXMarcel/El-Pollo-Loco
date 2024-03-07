@@ -33,8 +33,8 @@ class ThrowBottle extends MovableObject {
         this.x_Rect = x;
         this.height = 60;
         this.width = 50;
-        this.width_Rect = 10;
-        this.height_Rect = 10;
+        this.width_Rect = 50;
+        this.height_Rect = 60;
         this.throw();
     }
 
@@ -67,6 +67,5 @@ class ThrowBottle extends MovableObject {
             this.loadImage(element);
         };
         this.y = 9999;
-
     }
 }

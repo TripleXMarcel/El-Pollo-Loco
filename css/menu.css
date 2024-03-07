@@ -6,6 +6,14 @@ input {
     font-family: 'Single Day';
 }
 
+.impressum{
+    position: fixed;
+    top: 450px;
+    right: 40px;
+    text-decoration: none;
+    color: black;
+}
+
 #menu {
     height: 480px;
     width: 720px;

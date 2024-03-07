@@ -27,6 +27,13 @@ class World {
     ctx;
     gameOn;
     dead;
+    colectableCoins;
+    colectableSalsa;
+
+    /**
+     * Creates an instance of World.
+     * @param {HTMLCanvasElement} canvas - The canvas element.
+     */
     constructor(canvas) {
         this.gameOn = true;
         this.ctx = canvas.getContext('2d');
@@ -40,10 +47,18 @@ class World {
         this.dead = false;
     }
 
+    /**
+     * Sets up the world by initializing various properties and starting the game loop.
+     */
     setWorld() {
         this.character.world = this;
+        this.colectableCoins = this.level.bottle.length;
+        this.colectableSalsa = this.level.bottle.length;
     }
 
+    /**
+     * Pauses the game by stopping all game intervals.
+     */
     pause() {
         this.intervalIds = [this.level.clouds, this.level.enemies, this.character];
         for (var i = 0; i < this.intervalIds.length; i++) {
@@ -63,6 +78,9 @@ class World {
         this.muteEnemie();
     }
 
+    /**
+     * Resumes the game by restarting all game intervals.
+     */
     unpause() {
         this.intervalIds = [this.level.clouds, this.level.enemies, this.character];
         for (var i = 0; i < this.intervalIds.length; i++) {
@@ -77,6 +95,9 @@ class World {
         this.checkCollisions();
     }
 
+    /**
+     * Handles character death by pausing the game and displaying the game over screen.
+     */
     characterDead() {
         setTimeout(() => {
             this.pause();
@@ -88,10 +109,16 @@ class World {
         }, 5000);
     }
 
+    /**
+     * Handles end boss death by closing the game.
+     */
     endBossDead() {
         closeGame();
     }
 
+    /**
+     * Renders the end screen, either game over or victory screen.
+     */
     endScreen() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.addObjectsToMap(this.level.backgroundObjects);
@@ -105,13 +132,19 @@ class World {
 
     }
 
+    /**
+     * Closes the game by stopping all game activity.
+     */
     closeGame() {
         this.gameOn = false;
         this.pause();
     }
 
+    /**
+     * Draws the game world, including objects and status bars.
+     */
     draw() {
-        if (!this.gameOn) {return;}
+        if (!this.gameOn) { return; }
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.ctx.translate(this.camera_x, 0);
         this.drawObjectElements()
@@ -123,8 +156,12 @@ class World {
         }
         this.ctx.translate(-this.camera_x, 0);
         let self = this;
-        requestAnimationFrame(function () {self.draw();});
+        requestAnimationFrame(function () { self.draw(); });
     }
+
+    /**
+     * Draws all object elements in the game world.
+     */
 
     drawObjectElements() {
         this.addObjectsToMap(this.level.backgroundObjects);
@@ -135,6 +172,9 @@ class World {
         this.addObjectsToMap(this.throwableObjects);
     }
 
+    /**
+     * Draws all status bar elements in the game world.
+     */
     drawBarElements() {
         this.addObjectsToMap(this.statusbar.emptyStatusBar);
         this.addToMap(this.healthBar);
@@ -145,6 +185,9 @@ class World {
 
     }
 
+    /**
+     * Checks for collisions between game objects.
+     */
     checkCollisions() {
         this.interval = setInterval(() => {
             this.collidingEnemy();
@@ -156,6 +199,9 @@ class World {
 
     }
 
+    /**
+     * Throws a bottle if the character has salsa available.
+     */
     throw() {
         if (this.keyboard.THROW && this.character.salsa != 0) {
             let bottle = new ThrowBottle(this.character.x, this.character.y);
@@ -166,18 +212,27 @@ class World {
         }
     }
 
+    /**
+    * Plays enemy sounds based on character proximity.
+    */
     soundEnemie() {
         for (let i = 0; i < this.level.enemies.length; i++) {
             this.level.enemies[i].range(this.character.x)
         }
     }
 
+    /**
+     * Mutes all enemy sounds.
+     */
     muteEnemie() {
         for (let i = 0; i < this.level.enemies.length; i++) {
             this.level.enemies[i].muteSound()
         }
     }
 
+    /**
+     * Handles collisions between the character and enemies.
+     */
     collidingEnemy() {
         this.level.enemies.forEach((enemy, i) => {
             if (this.character.isCollidingTop(enemy)) {
@@ -191,18 +246,24 @@ class World {
         });
     }
 
+    /**
+     * Handles collisions between throwable objects and enemies.
+     */
     collidingThrowableObject() {
         this.level.enemies.forEach(enemy => {
             for (let j = 0; j < this.throwableObjects.length; j++) {
                 const element = this.throwableObjects[j];
                 if (element.isCollidingTop(enemy)) {
                     enemy.enemieHit();
+                    element.splashBottle();
                 }
             }
-
         });
     }
 
+    /**
+     * Handles collisions between the character and collectable objects.
+     */
     collidingCollectable() {
         this.level.coins.forEach((coin, i) => {
             if (this.character.isColliding(coin)) {
@@ -218,12 +279,20 @@ class World {
         });
     }
 
+    /**
+     * Adds multiple objects to the game world.
+     * @param {Array<GameObject>} objects - The objects to add.
+     */
     addObjectsToMap(objects) {
         objects.forEach(o => {
             this.addToMap(o)
         });
     }
 
+    /**
+     * Adds an object to the game world.
+     * @param {GameObject} mo - The object to add.
+     */
     addToMap(mo) {
         if (mo.otherDirection) {
             this.flipImage(mo);
@@ -234,6 +303,10 @@ class World {
         }
     }
 
+    /**
+     * Flips the image horizontally for the given game object.
+     * @param {GameObject} mo - The game object to flip.
+     */
     flipImage(mo) {
         this.ctx.save();
         this.ctx.translate(mo.width, 0);
@@ -242,6 +315,10 @@ class World {
         mo.x_Rect = (mo.x_Rect - mo.width_Rect + 10) * -1;
     }
 
+    /**
+     * Restores the image to its original orientation after flipping.
+     * @param {GameObject} mo - The game object to restore.
+     */
     flipImageBack(mo) {
         mo.x = mo.x * -1;
         mo.x_Rect = (mo.x_Rect - mo.width_Rect + 10) * -1;

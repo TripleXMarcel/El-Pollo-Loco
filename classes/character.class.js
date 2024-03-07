@@ -74,6 +74,9 @@ class Character extends MovableObject {
     world;
     walking_sound = new Audio('audio/going-on-a-forest-road-gravel-and-grass-6404.mp3');
 
+    /**
+     * Creates an instance of Character.
+     */
     constructor() {
         super().loadImage('img/2_character_pepe/2_walk/W-21.png');
         this.loadImages(this.IMAGES_WALKING);
@@ -85,6 +88,9 @@ class Character extends MovableObject {
         this.applyGravity();
     }
 
+    /**
+     * Adjusts the volume of the character's walking sound.
+     */
     volume() {
         if (sound === true) {
             this.walking_sound.volume = ((playerVolume / 100) * masterVolume) / 100;
@@ -93,6 +99,9 @@ class Character extends MovableObject {
         }
     }
 
+    /**
+     * Initiates the character's movement and animation.
+     */
     animate() {
         this.interval = setInterval(() => {
             this.moveCharacter();
@@ -102,6 +111,9 @@ class Character extends MovableObject {
         }, 100);
     }
 
+    /**
+     * Moves the character based on keyboard input.
+     */
     moveCharacter() {
         this.volume();
         if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x && gamePause === false) {
@@ -119,6 +131,9 @@ class Character extends MovableObject {
         this.world.camera_x = -this.x + 120;
     }
 
+    /**
+     * Animates the character based on its state.
+     */
     animationCharacter() {
         if (this.isDead() && gamePause === false) {
             this.playAnimation(this.IMAGES_DEAD);
@@ -135,5 +150,4 @@ class Character extends MovableObject {
             this.playAnimation(this.IMAGES_IDLE);
         }
     }
-
 }

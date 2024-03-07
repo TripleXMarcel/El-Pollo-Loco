@@ -24,6 +24,10 @@ class Chicken extends MovableObject {
     IMAGE_DEAD = 'img/3_enemies_chicken/chicken_normal/2_dead/dead.png';
     chicken_sound = new Audio('/audio/chicken-sounds-farm-background-sounds-ambient-sounds-143091.mp3');
 
+    /**
+     * Creates an instance of Chicken.
+     * @param {number} x - The initial horizontal position of the chicken.
+     */
     constructor(x) {
         super().loadImage('img/3_enemies_chicken/chicken_normal/1_walk/1_w.png');
         this.loadImages(this.IMAGES_WALK);
@@ -31,6 +35,9 @@ class Chicken extends MovableObject {
         this.x_Rect = this.x;
     }
 
+    /**
+     * Adjusts the volume of the chicken's sound.
+     */
     chickenVolume() {
         if (sound === true) {
             this.volume = (((chickenVolume / 100 / this.enemieRange)) * (masterVolume));
@@ -40,7 +47,9 @@ class Chicken extends MovableObject {
         }
     }
 
-
+    /**
+     * Initiates the animation and movement of the chicken.
+     */
     animate() {
         this.interval = setInterval(() => {
             this.chickenWalkAnimation();
@@ -57,12 +66,18 @@ class Chicken extends MovableObject {
         }, this.intervalspeed4);
     }
 
+    /**
+     * Animates the walking motion of the chicken.
+     */
     chickenWalkAnimation() {
         if (this.energy === 1 && gamePause === false) {
             this.playAnimation(this.IMAGES_WALK);
         }
     }
 
+    /**
+     * Moves the chicken horizontally.
+     */
     chickenMove() {
         if (this.energy === 1 && gamePause === false) {
             this.moveLeft();
@@ -70,6 +85,9 @@ class Chicken extends MovableObject {
         }
     }
 
+    /**
+     * Stops the chicken's sound when the game is paused.
+     */
     chickenSound() {
         if (this.energy === 1 && gamePause === true) {
             this.chickenVolume();
@@ -77,6 +95,9 @@ class Chicken extends MovableObject {
         }
     }
 
+    /**
+     * Adjusts the volume of the chicken's sound based on the distance from the character.
+     */
     chickenSoundVolume() {
         if (this.energy === 1 && gamePause === false) {
             if (this.enemieRange < 1000) {
@@ -86,6 +107,10 @@ class Chicken extends MovableObject {
         }
     }
 
+    /**
+     * Determines the distance between the chicken and the character.
+     * @param {number} characterX - The horizontal position of the character.
+     */
     range(characterX) {
         this.enemieRange = characterX - this.x + 1;
         if (this.enemieRange < 0) {
@@ -93,14 +118,23 @@ class Chicken extends MovableObject {
         }
     }
 
+    /**
+     * Stops the chicken's sound.
+     */
     muteSound() {
         this.chicken_sound.pause();
     }
 
+    /**
+     * Initiates the process of removing the chicken from the game.
+     */
     enemieHit() {
         this.kill();
     }
 
+    /**
+     * Kills the chicken, stopping its movement and sound.
+     */
     kill() {
         this.energy = 0;
         this.muteSound();

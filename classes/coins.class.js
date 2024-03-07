@@ -1,6 +1,5 @@
 class Coin extends MovableObject {
 
-    y = 200;
     width = 80;
     height = 80;
     y_Rect = 220;
@@ -12,14 +11,23 @@ class Coin extends MovableObject {
         'img/8_coin/coin_2.png'
     ];
 
+    /**
+     * Creates an instance of Coin.
+     * @param {number} x - The x-coordinate of the coin.
+     */
     constructor(x) {
         super().loadImage(this.IMAGES[0]);
         this.animate();
         this.loadImages(this.IMAGES);
         this.x = (719 * x) + Math.random() * 500;
-        this.x_Rect = this.x+20;
+        this.x_Rect = this.x + 20;
+        this.y = 180 + Math.random() * 200;
+        this.y_Rect = this.y + 20;
     }
 
+    /**
+     * Animates the coin by changing its image at regular intervals.
+     */
     animate() {
         setInterval(() => {
             this.playAnimation(this.IMAGES);

@@ -38,6 +38,7 @@ input {
     border-radius: 12px;
     border: 0;
     background-color: rgba(255, 255, 255, 0.5);
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.247);
 }
 
 .mainMenu button:hover {
@@ -89,6 +90,7 @@ input {
     border-radius: 12px;
     border: 0;
     background-color: rgba(255, 255, 255, 0.5);
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.247);
 }
 
 #options button:hover {
@@ -127,6 +129,7 @@ input {
     border-radius: 12px;
     border: 0;
     background-color: rgba(255, 255, 255, 0.5);
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.247);
 }
 
 .levelSelection button:hover {
@@ -142,6 +145,7 @@ input {
     border-radius: 12px;
     border: 0;
     background-color: rgba(255, 255, 255, 0.5);
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.247);
 }
 
 .startBTN:hover {
@@ -157,6 +161,7 @@ input {
     border-radius: 12px;
     border: 0;
     background-color: rgba(255, 255, 255, 0.5);
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.247);
 }
 
 .backToMenu:hover {
@@ -186,6 +191,7 @@ input {
     border-radius: 12px;
     border: 0;
     background-color: rgba(255, 255, 255, 0.5);
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.247);
 }
 
 #video button:hover {

@@ -6,6 +6,11 @@ class Bottle extends MovableObject{
     width_Rect = 10;
     height_Rect = 40;
 
+    /**
+     * Creates an instance of Bottle.
+     * @param {string} url - The URL of the image for the bottle.
+     * @param {number} x - The horizontal position of the bottle.
+     */
     constructor(url, x) {
         super().loadImage(url);
         this.x = (719 * x) + Math.random() * 500;

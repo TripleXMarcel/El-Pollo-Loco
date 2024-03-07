@@ -5,11 +5,19 @@ class Cloud extends MovableObject {
     speed = 0.2;
     interval;
 
+    /**
+     * Creates an instance of Cloud.
+     * @param {string} url - The URL of the image for the cloud.
+     * @param {number} x - The initial horizontal position of the cloud.
+     */
     constructor(url, x) {
         super().loadImage(url);
         this.x = (719 * x) + Math.random() * 500;
     }
 
+    /**
+     * Animates the movement of the cloud.
+     */
     animate() {
         this.speed = this.speed + Math.random() * 0.2;
         this.interval = setInterval(() => {

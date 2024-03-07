@@ -17,8 +17,9 @@ let sound = true;
 let gamePause = false;
 let endBossHealth = null;
 
-
-
+/**
+ * Initializes the game by setting up the canvas, loading controls, initializing the level, scaling the game, and loading the menu.
+ */
 function init() {
     canvas = document.getElementById('canvas');
     startScreen = new StartScreen(canvas);
@@ -30,7 +31,11 @@ function init() {
     }, 2000);
 }
 
-
+/**
+ * Dynamically loads a script file and executes a callback function upon completion.
+ * @param {string} url - The URL of the script file to load.
+ * @param {Function} callback - The function to execute after the script is loaded.
+ */
 function loadScript(url, callback) {
     var script = document.createElement('script');
     script.type = 'text/javascript';
@@ -39,6 +44,9 @@ function loadScript(url, callback) {
     document.head.appendChild(script);
 }
 
+/**
+ * Loads the game menu by dynamically loading the menu script and instantiating the menu object.
+ */
 function loadMenu() {
     loadScript('levels/menu.js', function () {
         menu = new Menu(canvas, keyboard);
@@ -46,8 +54,10 @@ function loadMenu() {
     });
 }
 
-
-
+/**
+ * Loads the appropriate level based on the current game level.
+ * @returns {Level} - The loaded level object.
+ */
 function loadLevel() {
     switch (level) {
         case 1:
@@ -59,6 +69,10 @@ function loadLevel() {
     }
 }
 
+/**
+ * Event listener for keydown events to handle keyboard input.
+ * @param {KeyboardEvent} e - The keydown event object.
+ */
 document.addEventListener('keydown', (e) => {
     if (e.key == 'ArrowUp' || e.key == 'w') {
         keyboard.UP = true;
@@ -87,6 +101,11 @@ document.addEventListener('keydown', (e) => {
         }
     };
 });
+
+/**
+ * Event listener for keyup events to handle keyboard input.
+ * @param {KeyboardEvent} e - The keyup event object.
+ */
 document.addEventListener('keyup', (e) => {
     if (e.key == 'ArrowUp' || e.key == 'w') {
         keyboard.UP = false;
@@ -109,18 +128,34 @@ document.addEventListener('keyup', (e) => {
 
 });
 
+/**
+ * Simulates left arrow key press for mobile devices.
+ * @param {boolean} bool - Indicates whether the key is pressed (true) or released (false).
+ */
 function mobileKeyLeft(bool){
     keyboard.LEFT = bool;
 }
 
+/**
+ * Simulates right arrow key press for mobile devices.
+ * @param {boolean} bool - Indicates whether the key is pressed (true) or released (false).
+ */
 function mobileKeyRight(bool){
     keyboard.RIGHT = bool;
 }
 
+/**
+ * Simulates jump key press for mobile devices.
+ * @param {boolean} bool - Indicates whether the key is pressed (true) or released (false).
+ */
 function mobileKeyJump(bool){
     keyboard.SPACE = bool;
 }
 
+/**
+ * Simulates attack key press for mobile devices.
+ * @param {boolean} bool - Indicates whether the key is pressed (true) or released (false).
+ */
 function mobileKeyAttack(bool){
     keyboard.ENTER = bool;
 }

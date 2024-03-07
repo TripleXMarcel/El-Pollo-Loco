@@ -1,5 +1,9 @@
-class CoinBar extends Statusbar{
+class CoinBar extends Statusbar {
     GREEN_BAR = 'img/7_statusbars/4_bar_elements/statusbar_green.png';
+
+    /**
+     * Creates an instance of CoinBar.
+     */
     constructor() {
         super();
         this.loadImage(this.GREEN_BAR);
@@ -8,8 +12,14 @@ class CoinBar extends Statusbar{
         this.height = 25;
         this.width = 0;
     }
-loadCoins(coins, i) {
-    this.percentage = coins / (i+coins);
-    this.width = 300*this.percentage; // Aufruf der Methode zur Breitenaktualisierung der HealthBar
-}
+
+    /**
+     * Updates the width of the coin bar based on the number of collected coins.
+     * @param {number} coins - The number of collected coins.
+     * @param {number} i - The total number of collectible coins.
+     */
+    loadCoins(coins, i) {
+        this.percentage = coins / world.colectableCoins;
+        this.width = 300 * this.percentage;
+    }
 }

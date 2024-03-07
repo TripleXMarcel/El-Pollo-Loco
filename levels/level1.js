@@ -1,15 +1,11 @@
 let level1;
-function loadLevel1(){
+function loadLevel1() {
     return new Level(
         [new Endboss(),
         new Chicken(2),
         new Chicken(2),
         new Chicken(4),
         new Chicken(4),
-        new Chicken(4),
-        new Chicken(4),
-        new Chicken(5),
-        new Chicken(5),
         new Chicken(7),
         new Chicken(7),
         new Chicken(7),
@@ -17,28 +13,11 @@ function loadLevel1(){
         new Chicken(9),
         new Chicken(9),
         new Chicken(9),
-        new Chicken(9),
-        new Chicken(9),
         new Chicken(10),
         new Chicken(10),
         new Chicken(10),
-        new Chicken(10),
-        new Chicken(10),
-        new Chicken(10),
-        new Chicken(11),
-        new Chicken(11),
-        new Chicken(11),
-        new Chicken(11),
-        new Chicken(11),
-        new Chicken(11),
-        new Chicken(12),
-        new Chicken(12),
-        new Chicken(12),
-        new Chicken(13),
-        new Chicken(13),
-        new Chicken(13),
-        new Chicken(13)
-    
+        new Chicken(10)
+
         ],
         [
             new Cloud('img/5_background/layers/4_clouds/1.png', 0),
@@ -83,7 +62,7 @@ function loadLevel1(){
             new Cloud('img/5_background/layers/4_clouds/2.png', 19),
             new Cloud('img/5_background/layers/4_clouds/1.png', 20),
             new Cloud('img/5_background/layers/4_clouds/2.png', 20),
-    
+
         ],
         [
             new BackgroundObject('img/5_background/layers/air.png', -719),
@@ -171,7 +150,7 @@ function loadLevel1(){
         new Bottle('img/6_salsa_bottle/2_salsa_bottle_on_ground.png', 10),
         new Bottle('img/6_salsa_bottle/1_salsa_bottle_on_ground.png', 11),
         new Bottle('img/6_salsa_bottle/2_salsa_bottle_on_ground.png', 12)
-        
+
     ]);
 }
 

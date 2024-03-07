@@ -14,7 +14,7 @@ class Endboss extends MovableObject {
     i = 0;
     music_on = false;
     bossRange = false;
-    boss_sound = new Audio('/audio/chicken-sounds-farm-background-sounds-ambient-sounds-143091.mp3');
+    boss_sound = new Audio('audio/chicken-sounds-farm-background-sounds-ambient-sounds-143091.mp3');
 
 
     IMAGES_ALERT = [

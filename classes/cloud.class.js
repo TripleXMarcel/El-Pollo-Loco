@@ -22,8 +22,6 @@ class Cloud extends MovableObject {
                     this.x = (719 * 20) + Math.random() * 500;
                 }
             }
-
-
         }, 1000 / 60);
     }
 }

@@ -27,13 +27,4 @@ class DrawableObject {
     draw(ctx) {
         ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
     }
-    drawFrame(ctx) {
-        if (this instanceof ThrowBottle || this instanceof Chicken) {
-            ctx.beginPath();
-            ctx.lineWidth = '5';
-            ctx.strokeStyle = 'blue';
-            ctx.rect(this.x_Rect, this.y_Rect, this.width_Rect, this.height_Rect);
-            ctx.stroke();
-        }
-    }
 }

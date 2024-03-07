@@ -1,7 +1,11 @@
 body {
     margin: 0;
     display: flex;
-    background-color: black;
+    background-image: url("backgroundImage.jpg");
+    background-color: #ccc;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
     font-family: 'Single Day';
     justify-content: center;
     align-items: center;
@@ -21,7 +25,7 @@ canvas {
     display: none !important;
 }
 
-#ingameOverlay{
+#ingameOverlay {
     display: flex;
     justify-content: flex-end;
     margin-top: 20px;
@@ -41,7 +45,7 @@ canvas {
 }
 
 
-#ingameContainer{
+#ingameContainer {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -67,7 +71,7 @@ canvas {
     background-color: rgba(0, 0, 0, 0.397);
 }
 
-#screenInformation{
+#screenInformation {
     height: 100vh;
     width: 100vw;
     background-color: black;
@@ -78,7 +82,7 @@ canvas {
     padding: 20px;
 }
 
-#screenInformation p{
+#screenInformation p {
     color: white;
     font-size: 55px;
 }

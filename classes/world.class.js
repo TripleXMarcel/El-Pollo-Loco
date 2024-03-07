@@ -157,7 +157,7 @@ class World {
     }
 
     throw() {
-        if (this.keyboard.THROW) {
+        if (this.keyboard.THROW && this.character.salsa != 0) {
             let bottle = new ThrowBottle(this.character.x, this.character.y);
             this.throwableObjects.push(bottle);
             this.keyboard.THROW = false;
@@ -228,7 +228,6 @@ class World {
         if (mo.otherDirection) {
             this.flipImage(mo);
         }
-        mo.drawFrame(this.ctx);
         mo.draw(this.ctx);
         if (mo.otherDirection) {
             this.flipImageBack(mo);

@@ -32,7 +32,6 @@ class Menu {
         if (mo.otherDirection) {
             this.flipImage(mo);
         }
-        //mo.drawFrame(this.ctx);
         mo.draw(this.ctx);
         if (mo.otherDirection) {
             this.flipImageBack(mo);

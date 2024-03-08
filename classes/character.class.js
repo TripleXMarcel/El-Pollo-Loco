@@ -10,6 +10,8 @@ class Character extends MovableObject {
     speed = 10;
     speedY = 0;
     onCollisionCourse = false;
+    idleLong = false;
+    idleTimer = 0;
     interval;
     interval2;
     IMAGES_WALKING = [
@@ -73,6 +75,7 @@ class Character extends MovableObject {
     ];
     world;
     walking_sound = new Audio('audio/going-on-a-forest-road-gravel-and-grass-6404.mp3');
+    hittingSound = new Audio('audio/hit.mp3');
 
     /**
      * Creates an instance of Character.
@@ -85,6 +88,7 @@ class Character extends MovableObject {
         this.loadImages(this.IMAGES_DEAD);
         this.loadImages(this.IMAGES_HURT);
         this.loadImages(this.IMAGES_IDLE);
+        this.loadImages(this.IMAGES_IDLE_LONG);
         this.applyGravity();
     }
 
@@ -94,8 +98,10 @@ class Character extends MovableObject {
     volume() {
         if (sound === true) {
             this.walking_sound.volume = ((playerVolume / 100) * masterVolume) / 100;
+            this.hittingSound.volume = ((playerVolume / 100) * masterVolume) / 100;
         } else {
             this.walking_sound.volume = 0;
+            this.hittingSound.volume = 0;
         }
     }
 
@@ -116,11 +122,11 @@ class Character extends MovableObject {
      */
     moveCharacter() {
         this.volume();
-        if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x && gamePause === false) {
+        if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x && gamePause === false && this.energy != 0) {
             this.moveRight();
             this.walking_sound.play();
         }
-        else if (this.world.keyboard.LEFT && this.x > 0 && gamePause === false) {
+        else if (this.world.keyboard.LEFT && this.x > 0 && gamePause === false && this.energy != 0) {
             this.moveLeft();
             this.walking_sound.play();
         }
@@ -139,15 +145,35 @@ class Character extends MovableObject {
             this.playAnimation(this.IMAGES_DEAD);
             this.world.characterDead();
         } else if (this.isHurt() && gamePause === false) {
-            this.playAnimation(this.IMAGES_HURT);
+            this.characterHurt();
         } else if (this.isAboveGrove() && this.speedY > 0 && gamePause === false) {
             this.playAnimation(this.IMAGES_JUMPING_UP);
         } else if (this.isAboveGrove() && this.speedY < 0 && gamePause === false) {
             this.playAnimation(this.IMAGES_JUMPING_DOWN);
         } else if ((this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x || this.world.keyboard.LEFT && this.x > 0) && gamePause === false) {
             this.playAnimation(this.IMAGES_WALKING);
+            this.idleTimer = 0;
         } else if (gamePause === false) {
-            this.playAnimation(this.IMAGES_IDLE);
+            this.idle();
         }
+    }
+
+    /**
+     * Switch between differant Idleanimations.
+     */
+    idle() {
+        if (this.idleTimer < 30) {
+            this.playAnimation(this.IMAGES_IDLE);
+            this.idleTimer++;
+        }
+        else {
+            this.playAnimation(this.IMAGES_IDLE_LONG);
+        }
+
+    }
+
+    characterHurt() {
+        this.hittingSound.play();
+        this.playAnimation(this.IMAGES_HURT);
     }
 }

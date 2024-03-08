@@ -16,6 +16,8 @@ class ThrowBottle extends MovableObject {
         'img/6_salsa_bottle/bottle_rotation/bottle_splash/6_bottle_splash.png'
     ];
     interval;
+    throwingSound = new Audio('audio/throweffect.mp3');
+    splashSound = new Audio('audio/glassbreak.mp3');
 
     /**
      * Creates an instance of ThrowBottle.
@@ -39,11 +41,26 @@ class ThrowBottle extends MovableObject {
     }
 
     /**
+    * Adjusts the volume of the bottle sound based on game settings.
+    */
+    bottleVolume() {
+        if (sound === true) {
+            this.throwingSound.volume = ((playerVolume / 100) * masterVolume) / 100;
+            this.splashSound.volume = ((playerVolume / 100) * masterVolume) / 100;
+        } else {
+            this.throwingSound.volume = 0;
+            this.splashSound.volume = 0;
+        }
+    }
+
+    /**
      * Throws the bottle, initiating the throwing animation and gravity effect.
      */
     throw() {
+        this.bottleVolume();
         this.speedY = 30;
         this.applyGravity();
+        this.throwingSound.play();
         this.interval = setInterval(() => {
             this.x += 10;
             this.x_Rect += 10;
@@ -61,6 +78,7 @@ class ThrowBottle extends MovableObject {
         clearInterval(this.interval);
         clearInterval(this.intervalGravity);
         this.y_Rect = 9999;
+        this.splashSound.play();
         for (this.i = 0; this.i < this.IMAGES_BOTTLESPLASH.length; this.i++) {
             await new Promise(resolve => setTimeout(resolve, 100));
             const element = this.IMAGES_BOTTLESPLASH[this.i];

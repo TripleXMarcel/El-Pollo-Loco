@@ -224,6 +224,7 @@ function openMenu(menu) {
     document.getElementById('levelMenu').classList.add('displayNone');
     document.getElementById('optionsMenu').classList.add('displayNone');
     document.getElementById('ingameContainer').classList.add('displayNone');
+    document.getElementById('anyKey').classList.add('displayNone');
     if (menu == undefined) {
         return;
     }
@@ -268,12 +269,15 @@ function initializeSliders() {
     let masterSlider = document.getElementById("masterVolumeSlider");
     let chickenSlider = document.getElementById('chickenVolumeSlider');
     let playerSlider = document.getElementById('playerVolumeSlider');
+    let musicSlider = document.getElementById('musicVolumeSlider');
     let masterValue = document.getElementById('masterVolumeValue');
     let chickenValue = document.getElementById('chickenVolumeValue');
     let playerValue = document.getElementById('playerVolumeValue');
+    let musicValue = document.getElementById('musicVolumeValue');
     masterValue.innerHTML = sliderHTML(masterSlider.value);
     chickenValue.innerHTML = sliderHTML(chickenSlider.value);
     playerValue.innerHTML = sliderHTML(playerSlider.value);
+    musicValue.innerHTML = sliderHTML(musicSlider.value);
 }
 
 /**
@@ -313,6 +317,18 @@ function attachPlayerSliderEventHandler() {
 }
 
 /**
+ * Attaches an event handler to the player volume slider to update its value display.
+ */
+function attachMusicSliderEventHandler() {
+    let musicSlider = document.getElementById('musicVolumeSlider');
+    let musicValue = document.getElementById('musicVolumeValue');
+    musicSlider.oninput = function () {
+        musicVolume = musicSlider.value;
+        musicValue.innerHTML = sliderHTML(musicSlider.value);
+    }
+}
+
+/**
  * Initializes the volume sliders and attaches event handlers to update their corresponding value displays.
  */
 document.addEventListener("DOMContentLoaded", function () {
@@ -320,6 +336,7 @@ document.addEventListener("DOMContentLoaded", function () {
     attachMasterSliderEventHandler();
     attachChickenSliderEventHandler();
     attachPlayerSliderEventHandler();
+    attachMusicSliderEventHandler();
 });
 
 /**

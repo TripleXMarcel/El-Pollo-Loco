@@ -33,6 +33,14 @@ canvas {
     margin-right: 20px;
 }
 
+#anyKey{
+    position: fixed;
+    top: 270px;
+    font-size: 44px;
+    color: rgb(228, 214, 19);
+    cursor:defaultd;
+}
+
 #ingameOverlay img {
     height: 40px;
     width: 40px;

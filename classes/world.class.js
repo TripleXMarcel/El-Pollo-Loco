@@ -29,6 +29,9 @@ class World {
     dead;
     colectableCoins;
     colectableSalsa;
+    endSound = new Audio('audio/endmusic.mp3');
+
+
 
     /**
      * Creates an instance of World.
@@ -99,14 +102,28 @@ class World {
      * Handles character death by pausing the game and displaying the game over screen.
      */
     characterDead() {
+        this.volumeSound();
         setTimeout(() => {
+            sound = false;
+            this.endSound.play();
             this.pause();
             this.dead = true;
             this.endScreen();
         }, 500);
         setTimeout(() => {
             closeGame();
-        }, 5000);
+        }, 10000);
+    }
+
+    /**
+    * Adjusts the volume of the end sound based on game settings.
+    */
+    volumeSound() {
+        if (sound === true) {
+            this.endSound.volume = ((musicVolume / 500) * masterVolume) / 100;
+        } else {
+            this.endSound.volume = 0;
+        }
     }
 
     /**
@@ -226,7 +243,7 @@ class World {
      */
     muteEnemie() {
         for (let i = 0; i < this.level.enemies.length; i++) {
-            this.level.enemies[i].muteSound()
+            this.level.enemies[i].muteSound();
         }
     }
 

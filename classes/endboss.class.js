@@ -9,9 +9,10 @@ class Endboss extends MovableObject {
     height_Rect = 340;
     width_Rect = 340;
     distance;
-    energy = 5;
+    energy = 8;
     speed = 4;
     i = 0;
+    maxVolume = 0.04
     music_on = false;
     bossRange = false;
     boss_sound = new Audio('audio/chicken-sounds-farm-background-sounds-ambient-sounds-143091.mp3');
@@ -65,18 +66,24 @@ class Endboss extends MovableObject {
     }
 
     /**
+    * Adjusts the volume of the boss sound based on game settings.
+    */
+    bossVolume() {
+        if (sound === true && gamePause === false) {
+            this.boss_sound.volume = (((chickenVolume / 100) * masterVolume) / 100);
+        } else {
+            this.boss_sound.volume = 0;
+        }
+    }
+
+    /**
      * Animates the end boss behavior.
      */
     animate() {
         this.interval = setInterval(() => {
+            this.bossVolume();
             if (this.bossRange === false) {
                 this.bossInRange();
-            } else if (gamePause === true) {
-                this.boss_sound.pause();
-                this.music_on = false;
-            } else if (this.music_on === false) {
-                this.boss_sound.play();
-                this.music_on = true;
             } else if (gamePause === false && this.isHurt() && this.energy > 0) { this.bossHurt(); }
             else if (gamePause === false && this.bossHitRange() == true < 10 && this.energy > 0) { this.bossAttack(); }
             else if (gamePause === false && this.energy > 0) { this.bossMove(); }
@@ -108,6 +115,7 @@ class Endboss extends MovableObject {
     bossHurt() {
         this.playAnimation(this.IMAGES_HURT);
         endBossHealth = this.energy;
+        this.speed += 2;
     }
 
     /**

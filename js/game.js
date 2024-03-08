@@ -13,9 +13,13 @@ let autoScale = false;
 let masterVolume = 50;
 let chickenVolume = 50;
 let playerVolume = 50;
+let musicVolume = 50;
+let start = true;
 let sound = true;
 let gamePause = false;
 let endBossHealth = null;
+let backgroundMusic = new Audio('audio/backgroundmusic.mp3');
+
 
 /**
  * Initializes the game by setting up the canvas, loading controls, initializing the level, scaling the game, and loading the menu.
@@ -26,10 +30,31 @@ function init() {
     loadControls();
     document.getElementById('selectedLevel').innerHTML = `Level ${level}`;
     scale();
-    setTimeout(() => {
-        loadMenu();
-    }, 2000);
 }
+
+/**
+ * Function to handle the background sound.
+ */
+function backgroundSound() {
+    setInterval(() => {
+        backgroundMusic.volume = ((musicVolume / 500) * masterVolume) / 100;
+        if (gamePause === true || sound === false) {
+            backgroundMusic.pause();
+        } else if (gamePause === false && sound === true) {
+            backgroundMusic.play();
+        }
+    }, 1000 / 60);
+}
+
+/**
+ * Eventlistener any key pressed.
+ */
+document.addEventListener('keydown', function (event) {
+    if (start === true) {
+        loadMenu();
+        start = false;
+    }
+});
 
 /**
  * Dynamically loads a script file and executes a callback function upon completion.
@@ -51,6 +76,7 @@ function loadMenu() {
     loadScript('levels/menu.js', function () {
         menu = new Menu(canvas, keyboard);
         openMenu('mainMenu');
+        backgroundSound();
     });
 }
 
@@ -132,7 +158,7 @@ document.addEventListener('keyup', (e) => {
  * Simulates left arrow key press for mobile devices.
  * @param {boolean} bool - Indicates whether the key is pressed (true) or released (false).
  */
-function mobileKeyLeft(bool){
+function mobileKeyLeft(bool) {
     keyboard.LEFT = bool;
 }
 
@@ -140,7 +166,7 @@ function mobileKeyLeft(bool){
  * Simulates right arrow key press for mobile devices.
  * @param {boolean} bool - Indicates whether the key is pressed (true) or released (false).
  */
-function mobileKeyRight(bool){
+function mobileKeyRight(bool) {
     keyboard.RIGHT = bool;
 }
 
@@ -148,7 +174,7 @@ function mobileKeyRight(bool){
  * Simulates jump key press for mobile devices.
  * @param {boolean} bool - Indicates whether the key is pressed (true) or released (false).
  */
-function mobileKeyJump(bool){
+function mobileKeyJump(bool) {
     keyboard.SPACE = bool;
 }
 
@@ -156,6 +182,6 @@ function mobileKeyJump(bool){
  * Simulates attack key press for mobile devices.
  * @param {boolean} bool - Indicates whether the key is pressed (true) or released (false).
  */
-function mobileKeyAttack(bool){
-    keyboard.ENTER = bool;
+function mobileKeyAttack(bool) {
+    keyboard.THROW = bool;
 }

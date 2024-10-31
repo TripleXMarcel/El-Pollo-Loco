@@ -49,12 +49,15 @@ function backgroundSound() {
 /**
  * Eventlistener any key pressed.
  */
-document.addEventListener('keydown', function (event) {
+function handleStart() {
     if (start === true) {
         loadMenu();
         start = false;
     }
-});
+}
+
+document.addEventListener('keydown', handleStart);
+document.addEventListener('click', handleStart);
 
 /**
  * Dynamically loads a script file and executes a callback function upon completion.
